@@ -9,6 +9,8 @@ interface Props {
 
 // todo, replace with material ui picker https://material-ui.com/components/pickers/
 export const DateSelect = ({ label, date, setDate }: Props) => {
+// todo, add event like: 
+//  event: React.ChangeEvent<{ value: unknown }>
   const handleDateChange = (e: any) => {
     setDate(e.target.value);
   };

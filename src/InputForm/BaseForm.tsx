@@ -34,8 +34,9 @@ export const BaseForm = () => {
         date={formState.toDate}
         setDate={setToDate}
       />
-      country:
-      <CountrySelect />
+      <CountrySelect 
+      countries={formState.countries}
+      setCountries={setCountries}/>
     </>
   );
 };
