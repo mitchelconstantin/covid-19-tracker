@@ -24,7 +24,7 @@ const formatData = (data: CountryDictionary) => {
   const rows = dataSets.flat();
   return { columns, rows };
 };
-
+//todo see render errors in console and fix
 export const DataTable = ({ data }: Props) => {
   const { columns, rows } = formatData(data);
 

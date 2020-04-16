@@ -1,5 +1,6 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
+import { convertTime } from '../../shared/Behaviors';
+import { KeyboardDatePicker } from '@material-ui/pickers';
 
 interface Props {
   label: string;
@@ -7,26 +8,29 @@ interface Props {
   setDate: any;
 }
 
-// todo, replace with material ui picker https://material-ui.com/components/pickers/
 export const DateSelect = ({ label, date, setDate }: Props) => {
-// todo, add event like: 
-//  event: React.ChangeEvent<{ value: unknown }>
-  const handleDateChange = (e: any) => {
-    setDate(e.target.value);
+  const handleDateChange = (date: Date | null) => {
+    var result = date && convertTime(date);
+    setDate(result);
   };
-  
+
+  console.log('using this date', date);
+  //todo add to/from before/after validation
   return (
-    <form noValidate>
-      <TextField
-        id="date"
+    <>
+      <KeyboardDatePicker
+        disableToolbar
+        variant="inline"
+        format="MM/dd/yyyy"
+        margin="normal"
+        id="date-picker-inline"
         label={label}
-        type="date"
-        defaultValue={date}
+        value={date}
         onChange={handleDateChange}
-        InputLabelProps={{
-          shrink: true,
+        KeyboardButtonProps={{
+          'aria-label': 'change date',
         }}
       />
-    </form>
+    </>
   );
 };

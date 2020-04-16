@@ -22,8 +22,6 @@ export const BaseForm = ({ formState, setFormState, countryList }: Props) => {
     setFormState((prev: any) => ({ ...prev, selectedCountries }));
   };
 
-  console.log('formState', formState);
-
   return (
     <>
       <DateSelect

@@ -1,3 +1,5 @@
+import { today, tenDaysAgo } from "./Behaviors";
+
 export interface CovidDataPoint {
   date: string;
   confirmed: number;
@@ -15,8 +17,10 @@ export interface FormState {
   fromDate: string;
   selectedCountries: CountryList;
 }
+
+
 export const emptyFormState = {
-  toDate: '',
-  fromDate: '',
+  toDate: today(),
+  fromDate: tenDaysAgo(),
   selectedCountries: [],
 };
