@@ -9,10 +9,7 @@ interface Props {
 const formatData = (data: CountryDictionary) => {
   //todo consider another way to make an enum of types
   const columns = ['country', 'date', 'confirmed', 'deaths', 'recovered'];
-console.log('data', data);
   const dataSets = Object.entries(data).map(([country, dataPoints]) => {
-    console.log('country', country);
-    //todo country is index instead of name, fix that
     return dataPoints.map((dataPoint) => [
       country,
       dataPoint.date,
@@ -21,8 +18,9 @@ console.log('data', data);
       dataPoint.recovered,
     ]);
   });
-  //combine sub arrays into one large array
   //todo consider keeping seperate and having distinct graphs for each country
+
+  //combine sub arrays into one large array
   const rows = dataSets.flat();
   return { columns, rows };
 };

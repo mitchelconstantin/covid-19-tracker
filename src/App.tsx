@@ -5,7 +5,32 @@ import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
 import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/API/CovidAPI';
-import { CountryDictionary, CountryList, emptyFormState } from './shared/Types';
+import {
+  CountryDictionary,
+  CountryList,
+  emptyFormState,
+  FormState,
+} from './shared/Types';
+
+const filterData = (
+  covidData: CountryDictionary,
+  formState: FormState
+): CountryDictionary => {
+  const newData: CountryDictionary = {};
+  formState.selectedCountries.forEach((country) => {
+    const filteredData = covidData[country].filter(({ date }) => {
+      const formattedDataTime = new Date(date);
+      const formattedFromDate = new Date(formState.fromDate);
+      const formattedToDate = new Date(formState.toDate);
+      return (
+        formattedDataTime >= formattedFromDate &&
+        formattedDataTime <= formattedToDate
+      );
+    });
+    newData[country] = filteredData;
+  });
+  return newData;
+};
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -26,21 +51,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    //todo split this out into seperate function
-    let newData: CountryDictionary = {};
-    formState.selectedCountries.forEach((country) => {
-      let filteredData = covidData[country].filter(({date}) => {
-        const formattedDataTime = new Date(date);
-        const formattedFromDate = new Date(formState.fromDate);
-        const formattedToDate = new Date(formState.toDate);
-        return (
-          formattedDataTime >= formattedFromDate &&
-          formattedDataTime <= formattedToDate
-        );
-      });
-      newData[country] = filteredData;
-    });
-    setSelectedCovidData(newData);
+    setSelectedCovidData(filterData(covidData, formState));
   }, [formState, covidData]);
 
   //todo replace with progress bar

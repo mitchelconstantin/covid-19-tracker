@@ -6,6 +6,7 @@ export const convertTime = (date: Date) => {
     timeZone: 'UTC',
   });
 };
+
 export const today = () => convertTime(new Date());
 
 export const tenDaysAgo = () => {

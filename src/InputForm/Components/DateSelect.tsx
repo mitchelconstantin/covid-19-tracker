@@ -17,7 +17,6 @@ export const DateSelect = ({ label, date, setDate }: Props) => {
   console.log('using this date', date);
   //todo add to/from before/after validation
   return (
-    <>
       <KeyboardDatePicker
         disableToolbar
         variant="inline"
@@ -31,6 +30,5 @@ export const DateSelect = ({ label, date, setDate }: Props) => {
           'aria-label': 'change date',
         }}
       />
-    </>
   );
 };
