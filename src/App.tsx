@@ -8,20 +8,20 @@ import { CovidAPI } from './shared/API/CovidAPI';
 import {
   CountryDictionary,
   CountryList,
-  emptyFormState,
+  defaultFormData,
   FormState,
 } from './shared/Types';
 
 const filterData = (
   covidData: CountryDictionary,
-  formState: FormState
+  formData: FormState
 ): CountryDictionary => {
   const newData: CountryDictionary = {};
-  formState.selectedCountries.forEach((country) => {
+  formData.selectedCountries.forEach((country) => {
     const filteredData = covidData[country].filter(({ date }) => {
       const formattedDataTime = new Date(date);
-      const formattedFromDate = new Date(formState.fromDate);
-      const formattedToDate = new Date(formState.toDate);
+      const formattedFromDate = new Date(formData.fromDate);
+      const formattedToDate = new Date(formData.toDate);
       return (
         formattedDataTime >= formattedFromDate &&
         formattedDataTime <= formattedToDate
@@ -34,8 +34,7 @@ const filterData = (
 
 const App = () => {
   const [loading, setLoading] = useState(true);
-  //todo rename to formData or similar
-  const [formState, setFormState] = useState(emptyFormState);
+  const [formData, setFormData] = useState(defaultFormData);
   const [covidData, setCovidData] = useState<CountryDictionary>({});
   const [countryList, setCountryList] = useState<CountryList>([]);
   const [selectedCovidData, setSelectedCovidData] = useState<CountryDictionary>(
@@ -51,18 +50,17 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    setSelectedCovidData(filterData(covidData, formState));
-  }, [formState, covidData]);
+    setSelectedCovidData(filterData(covidData, formData));
+  }, [formData, covidData]);
 
   //todo replace with progress bar
   if (loading) return <div>loading</div>;
-  // console.log('formState', formState);
-  // console.log('selectedCovidData, ', selectedCovidData);
+
   return (
     <div className="App">
       <BaseForm
-        formState={formState}
-        setFormState={setFormState}
+        formData={formData}
+        setFormData={setFormData}
         countryList={countryList}
       />
       <TimeSeriesPlot />

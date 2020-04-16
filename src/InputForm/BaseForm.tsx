@@ -6,34 +6,34 @@ import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 interface Props {
-  formState: any;
-  setFormState: any;
+  formData: any;
+  setFormData: any;
   countryList: CountryList;
 }
 //todo fix any types
-export const BaseForm = ({ formState, setFormState, countryList }: Props) => {
+export const BaseForm = ({ formData, setFormData, countryList }: Props) => {
   const setFromDate = (fromDate: string) => {
-    setFormState((prev: any) => ({ ...prev, fromDate }));
+    setFormData((prev: any) => ({ ...prev, fromDate }));
   };
 
   const setToDate = (toDate: string) => {
-    setFormState((prev: any) => ({ ...prev, toDate }));
+    setFormData((prev: any) => ({ ...prev, toDate }));
   };
 
   const setSelectedCountries = (selectedCountries: any) => {
-    setFormState((prev: any) => ({ ...prev, selectedCountries }));
+    setFormData((prev: any) => ({ ...prev, selectedCountries }));
   };
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <DateSelect
         label="from"
-        date={formState.fromDate}
+        date={formData.fromDate}
         setDate={setFromDate}
       />
-      <DateSelect label="to" date={formState.toDate} setDate={setToDate} />
+      <DateSelect label="to" date={formData.toDate} setDate={setToDate} />
       <CountrySelect
-        selectedCountries={formState.selectedCountries}
+        selectedCountries={formData.selectedCountries}
         setSelectedCountries={setSelectedCountries}
         countryList={countryList}
       />
