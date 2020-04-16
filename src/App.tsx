@@ -5,29 +5,21 @@ import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
 import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/API/CovidAPI';
-import { CountryDictionary } from './shared/Types';
-
-const extractCountryNames = (data: CountryDictionary) => {
-  return Object.keys(data);
-};
+import { CountryDictionary, CountryList } from './shared/Types';
 
 const App = () => {
-  const [covidData, setCovidData] = useState<CountryDictionary>();
-  const [countryList, setCountryList] = useState<string[]>();
+  const [covidData, setCovidData] = useState<CountryDictionary>({});
+  const [countryList, setCountryList] = useState<CountryList>([]);
   useEffect(() => {
-    CovidAPI.getAll().then((res) => {
-      setCovidData(res);
-      setCountryList(extractCountryNames(res));
+    CovidAPI.getAll().then(({ fullData, countries }) => {
+      setCovidData(fullData);
+      setCountryList(countries);
     });
   }, []);
-  if (covidData) {
-    console.log('covidData', covidData['Afghanistan']);
-  }
-  console.log('countryList', countryList);
 
   return (
     <div className="App">
-      <BaseForm />
+      <BaseForm countryList={countryList} />
       <TimeSeriesPlot />
       <DataTable />
       <ColorSelector />

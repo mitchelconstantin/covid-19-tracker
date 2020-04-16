@@ -4,6 +4,7 @@ export interface CovidDataPoint {
   deaths: number;
   recovered: number;
 }
+export type CountryList = string[];
 
 export interface CountryDictionary {
   [countryName: string]: CovidDataPoint[];

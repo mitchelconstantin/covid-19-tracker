@@ -14,7 +14,7 @@ export const DataTable = () => {
   //   CountryAPI.getAll().then((res) => setCountries(res));
   // }, []);
 
-  console.log('your data', data);
-  console.log('your countries', countries);
+  // console.log('your data', data);
+  // console.log('your countries', countries);
   return <div>I am a data table</div>;
 };

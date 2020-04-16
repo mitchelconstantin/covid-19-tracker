@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { DateSelect } from './Components/DateSelect';
 import { CountrySelect } from './Components/CountrySelect';
+import { CountryList } from '../shared/Types';
 
 const emptyFormState = {
   toDate: '',
   fromDate: '',
   countries: [],
 };
-export const BaseForm = () => {
+
+interface Props {
+ countryList: CountryList;
+}
+
+
+export const BaseForm = ({countryList}: Props) => {
   const [formState, setFormState] = useState(emptyFormState);
 
   const setFromDate = (fromDate: string) => {
@@ -29,14 +36,12 @@ export const BaseForm = () => {
         date={formState.fromDate}
         setDate={setFromDate}
       />
-      <DateSelect
-        label="to"
-        date={formState.toDate}
-        setDate={setToDate}
+      <DateSelect label="to" date={formState.toDate} setDate={setToDate} />
+      <CountrySelect
+        countries={formState.countries}
+        setCountries={setCountries}
+        countryList={countryList}
       />
-      <CountrySelect 
-      countries={formState.countries}
-      setCountries={setCountries}/>
     </>
   );
 };

@@ -11,10 +11,12 @@ import {
   MenuItem,
   useTheme,
 } from '@material-ui/core';
+import { CountryList } from '../../shared/Types';
 
 interface Props {
   countries: any;
   setCountries: any;
+  countryList: CountryList;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -48,19 +50,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 function getStyles(name: string, personName: string[], theme: Theme) {
   return {
     fontWeight:
@@ -70,7 +59,7 @@ function getStyles(name: string, personName: string[], theme: Theme) {
   };
 }
 
-export const CountrySelect = ({ countries, setCountries }: Props) => {
+export const CountrySelect = ({ countries, setCountries, countryList }: Props) => {
   const [personName, setPersonName] = React.useState<string[]>([]);
   const theme = useTheme();
   const classes = useStyles();
@@ -81,7 +70,7 @@ export const CountrySelect = ({ countries, setCountries }: Props) => {
   // const handleSetcountries = (e: any) => {
   //   setCountries(e.target.value);
   // };
-  console.log('countries', countries);
+  // console.log('countries', countries);
 
   return (
     <>
@@ -104,13 +93,13 @@ export const CountrySelect = ({ countries, setCountries }: Props) => {
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {countryList.map((country) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={country}
+              value={country}
+              style={getStyles(country, personName, theme)}
             >
-              {name}
+              {country}
             </MenuItem>
           ))}
         </Select>
