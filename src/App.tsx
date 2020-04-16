@@ -11,12 +11,30 @@ const App = () => {
   const [formState, setFormState] = useState(emptyFormState);
   const [covidData, setCovidData] = useState<CountryDictionary>({});
   const [countryList, setCountryList] = useState<CountryList>([]);
+  const [selectedCovidData, setSelectedCovidData] = useState<CountryDictionary>(
+    {}
+  );
+
   useEffect(() => {
     CovidAPI.getAll().then(({ fullData, countries }) => {
       setCovidData(fullData);
       setCountryList(countries);
     });
   }, []);
+
+  useEffect(() => {
+    //@ts-ignore
+    let relevantData = [];
+    formState.selectedCountries.forEach((country) => {
+      //todo filter by dates
+      relevantData.push(covidData[country]);
+    });
+    //@ts-ignore
+    setSelectedCovidData(relevantData);
+    //@ts-ignore
+  }, [formState, covidData]);
+
+  console.log('selected data', selectedCovidData);
 
   return (
     <div className="App">
@@ -26,10 +44,7 @@ const App = () => {
         countryList={countryList}
       />
       <TimeSeriesPlot />
-      <DataTable
-        formState={formState}
-        data={covidData}
-      />
+      <DataTable data={selectedCovidData} />
       <ColorSelector />
     </div>
   );

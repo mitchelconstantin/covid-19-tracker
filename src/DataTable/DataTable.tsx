@@ -1,48 +1,32 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
-import { CountryDictionary, FormState } from '../shared/Types';
+import { CountryDictionary } from '../shared/Types';
 
 interface Props {
-  formState: FormState;
   data: CountryDictionary;
 }
 
-//todo move this method up so the graph can use it
-//probably can be in a behaivor on the app itself
-const getSelectedCountriesData = (
-  data: CountryDictionary,
-  formState: FormState
-) => {
-  // const selectedCountries = countries.map((country) => ({
-  //   [country]: data[country],
-  // }));
-
+const formatData = (data: CountryDictionary) => {
   //todo consider another way to make an enum of types
   const columns = ['country', 'date', 'confirmed', 'deaths', 'recovered'];
 
-  //todo add types for rows
-  //@ts-ignore
-  const rows = [];
-
-  formState.selectedCountries.forEach((country) => {
-    data[country].forEach((dataPoint) => {
-      rows.push([
-        country,
-        dataPoint.date,
-        dataPoint.confirmed,
-        dataPoint.deaths,
-        dataPoint.recovered,
-      ]);
-    });
-  });
-  //@ts-ignore
+  const dataSets = Object.entries(data).map(([country, dataPoints]) =>
+    dataPoints.map((dataPoint) => [
+      country,
+      dataPoint.date,
+      dataPoint.confirmed,
+      dataPoint.deaths,
+      dataPoint.recovered,
+    ])
+  );
+  //combine sub arrays into one large array
+  //todo consider keeping seperate and having distinct graphs for each country
+  const rows = dataSets.flat();
   return { columns, rows };
 };
 
-export const DataTable = ({ formState, data }: Props) => {
-  const { columns, rows } = getSelectedCountriesData(data, formState);
+export const DataTable = ({ data }: Props) => {
+  const { columns, rows } = formatData(data);
 
-  return (
-      <MUIDataTable title={'Raw data'} data={rows} columns={columns} />
-  );
+  return <MUIDataTable title={'Raw data'} data={rows} columns={columns} />;
 };
