@@ -6,8 +6,6 @@ import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/API/CovidAPI';
 import { CountryDictionary, CountryList, emptyFormState } from './shared/Types';
-import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -44,18 +42,16 @@ const App = () => {
   // console.log('formState', formState);
   // console.log('selectedCovidData, ', selectedCovidData);
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <div className="App">
-        <BaseForm
-          formState={formState}
-          setFormState={setFormState}
-          countryList={countryList}
-        />
-        {/* <TimeSeriesPlot /> */}
-        {/* <DataTable data={selectedCovidData} /> */}
-        {/* <ColorSelector /> */}
-      </div>
-    </MuiPickersUtilsProvider>
+    <div className="App">
+      <BaseForm
+        formState={formState}
+        setFormState={setFormState}
+        countryList={countryList}
+      />
+      <TimeSeriesPlot />
+      <DataTable data={selectedCovidData} />
+      <ColorSelector />
+    </div>
   );
 };
 

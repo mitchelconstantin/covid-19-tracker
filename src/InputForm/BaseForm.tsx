@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DateSelect } from './Components/DateSelect';
 import { CountrySelect } from './Components/CountrySelect';
 import { CountryList } from '../shared/Types';
+import DateFnsUtils from '@date-io/date-fns';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 interface Props {
   formState: any;
   setFormState: any;
   countryList: CountryList;
 }
-//todo fix any types 
+//todo fix any types
 export const BaseForm = ({ formState, setFormState, countryList }: Props) => {
   const setFromDate = (fromDate: string) => {
     setFormState((prev: any) => ({ ...prev, fromDate }));
@@ -23,7 +25,7 @@ export const BaseForm = ({ formState, setFormState, countryList }: Props) => {
   };
 
   return (
-    <>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <DateSelect
         label="from"
         date={formState.fromDate}
@@ -35,6 +37,6 @@ export const BaseForm = ({ formState, setFormState, countryList }: Props) => {
         setSelectedCountries={setSelectedCountries}
         countryList={countryList}
       />
-    </>
+    </MuiPickersUtilsProvider>
   );
 };
