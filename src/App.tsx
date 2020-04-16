@@ -8,6 +8,7 @@ import { CovidAPI } from './shared/API/CovidAPI';
 import { CountryDictionary, CountryList, emptyFormState } from './shared/Types';
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const [formState, setFormState] = useState(emptyFormState);
   const [covidData, setCovidData] = useState<CountryDictionary>({});
   const [countryList, setCountryList] = useState<CountryList>([]);
@@ -19,6 +20,7 @@ const App = () => {
     CovidAPI.getAll().then(({ fullData, countries }) => {
       setCovidData(fullData);
       setCountryList(countries);
+      setLoading(false);
     });
   }, []);
 
@@ -34,8 +36,8 @@ const App = () => {
     //@ts-ignore
   }, [formState, covidData]);
 
-  console.log('selected data', selectedCovidData);
-
+  //todo replace with progress bar
+  if (loading) return <div>loading</div>;
   return (
     <div className="App">
       <BaseForm
