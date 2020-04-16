@@ -9,13 +9,12 @@ import {
   Input,
   Chip,
   MenuItem,
-  useTheme,
 } from '@material-ui/core';
 import { CountryList } from '../../shared/Types';
 
 interface Props {
-  countries: any;
-  setCountries: any;
+  selectedCountries: any;
+  setSelectedCountries: any;
   countryList: CountryList;
 }
 
@@ -50,38 +49,24 @@ const MenuProps = {
   },
 };
 
-function getStyles(name: string, personName: string[], theme: Theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-export const CountrySelect = ({ countries, setCountries, countryList }: Props) => {
-  const [personName, setPersonName] = React.useState<string[]>([]);
-  const theme = useTheme();
+export const CountrySelect = ({
+  selectedCountries,
+  setSelectedCountries,
+  countryList,
+}: Props) => {
   const classes = useStyles();
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setPersonName(event.target.value as string[]);
+    setSelectedCountries(event.target.value);
   };
-
-  // const handleSetcountries = (e: any) => {
-  //   setCountries(e.target.value);
-  // };
-  // console.log('countries', countries);
-
+// todo fix jank when selecting multiple countries
   return (
-    <>
-      <div>please select your countries</div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
+        <InputLabel id="demo-mutiple-chip-label">Select Countries</InputLabel>
         <Select
           labelId="demo-mutiple-chip-label"
           id="demo-mutiple-chip"
           multiple
-          value={personName}
+          value={selectedCountries}
           onChange={handleChange}
           input={<Input id="select-multiple-chip" />}
           renderValue={(selected) => (
@@ -94,16 +79,11 @@ export const CountrySelect = ({ countries, setCountries, countryList }: Props) =
           MenuProps={MenuProps}
         >
           {countryList.map((country) => (
-            <MenuItem
-              key={country}
-              value={country}
-              style={getStyles(country, personName, theme)}
-            >
+            <MenuItem key={country} value={country}>
               {country}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-    </>
   );
 };

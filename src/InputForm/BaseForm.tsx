@@ -3,31 +3,26 @@ import { DateSelect } from './Components/DateSelect';
 import { CountrySelect } from './Components/CountrySelect';
 import { CountryList } from '../shared/Types';
 
-const emptyFormState = {
-  toDate: '',
-  fromDate: '',
-  countries: [],
-};
-
 interface Props {
- countryList: CountryList;
+  formState: any;
+  setFormState: any;
+  countryList: CountryList;
 }
-
-
-export const BaseForm = ({countryList}: Props) => {
-  const [formState, setFormState] = useState(emptyFormState);
-
+//todo fix any types 
+export const BaseForm = ({ formState, setFormState, countryList }: Props) => {
   const setFromDate = (fromDate: string) => {
-    setFormState((prev) => ({ ...prev, fromDate }));
+    setFormState((prev: any) => ({ ...prev, fromDate }));
   };
 
   const setToDate = (toDate: string) => {
-    setFormState((prev) => ({ ...prev, toDate }));
+    setFormState((prev: any) => ({ ...prev, toDate }));
   };
 
-  const setCountries = (countries: any) => {
-    setFormState((prev) => ({ ...prev, countries }));
+  const setSelectedCountries = (selectedCountries: any) => {
+    setFormState((prev: any) => ({ ...prev, selectedCountries }));
   };
+
+  console.log('formState', formState);
 
   return (
     <>
@@ -38,8 +33,8 @@ export const BaseForm = ({countryList}: Props) => {
       />
       <DateSelect label="to" date={formState.toDate} setDate={setToDate} />
       <CountrySelect
-        countries={formState.countries}
-        setCountries={setCountries}
+        selectedCountries={formState.selectedCountries}
+        setSelectedCountries={setSelectedCountries}
         countryList={countryList}
       />
     </>

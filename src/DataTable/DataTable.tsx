@@ -1,20 +1,25 @@
-import React, { useEffect, useState } from 'react';
-import { CovidAPI } from '../shared/API/CovidAPI';
-import { CountryAPI } from '../shared/API/CountryAPI';
+import React from 'react';
+import { CountryDictionary, FormState } from '../shared/Types';
 
-export const DataTable = () => {
-  const [data, setData] = useState(['empty']);
-  const [countries, setCountries] = useState(['empty']);
+interface Props {
+  formState: FormState;
+  data: CountryDictionary;
+}
+//todo move this method up so the graph can use it
+//probably can be in a behaivor on the app itself
+const getSelectedCountriesData = (
+  data: CountryDictionary,
+  countries: string[]
+) => {
+  return countries.map((country) => ({ [country]: data[country] }));
+};
 
-  // useEffect(() => {
-  //   CovidAPI.getAllCountriesLatest().then((res) => setData(res));
-  // }, []);
+export const DataTable = ({ formState, data }: Props) => {
+  const rowsToShow = getSelectedCountriesData(
+    data,
+    formState.selectedCountries
+  );
 
-  // useEffect(() => {
-  //   CountryAPI.getAll().then((res) => setCountries(res));
-  // }, []);
-
-  // console.log('your data', data);
-  // console.log('your countries', countries);
-  return <div>I am a data table</div>;
+  console.log('rows to show,', rowsToShow);
+  return <>{formState.selectedCountries.map((country) => country)}</>;
 };

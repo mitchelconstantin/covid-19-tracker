@@ -5,9 +5,10 @@ import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
 import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/API/CovidAPI';
-import { CountryDictionary, CountryList } from './shared/Types';
+import { CountryDictionary, CountryList, emptyFormState } from './shared/Types';
 
 const App = () => {
+  const [formState, setFormState] = useState(emptyFormState);
   const [covidData, setCovidData] = useState<CountryDictionary>({});
   const [countryList, setCountryList] = useState<CountryList>([]);
   useEffect(() => {
@@ -19,9 +20,16 @@ const App = () => {
 
   return (
     <div className="App">
-      <BaseForm countryList={countryList} />
+      <BaseForm
+        formState={formState}
+        setFormState={setFormState}
+        countryList={countryList}
+      />
       <TimeSeriesPlot />
-      <DataTable />
+      <DataTable
+        formState={formState}
+        data={covidData}
+      />
       <ColorSelector />
     </div>
   );
