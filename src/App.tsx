@@ -6,7 +6,6 @@ import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/API/CovidAPI';
 import { CountryDictionary, CountryList, emptyFormState } from './shared/Types';
-import { convertTime } from './shared/Behaviors';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -28,20 +27,20 @@ const App = () => {
 
   useEffect(() => {
     //todo split this out into seperate function
-    let filteredData = formState.selectedCountries.map((country) =>
-      covidData[country].filter((dataPoint) => {
-        const formattedDataTime = new Date(dataPoint.date);
+    let newData: CountryDictionary = {};
+    formState.selectedCountries.forEach((country) => {
+      let filteredData = covidData[country].filter(({date}) => {
+        const formattedDataTime = new Date(date);
         const formattedFromDate = new Date(formState.fromDate);
         const formattedToDate = new Date(formState.toDate);
-        //todo figure out why this is 9 days instead of 10 by default
         return (
           formattedDataTime >= formattedFromDate &&
           formattedDataTime <= formattedToDate
         );
-      })
-    );
-    //@ts-ignore
-    setSelectedCovidData(filteredData);
+      });
+      newData[country] = filteredData;
+    });
+    setSelectedCovidData(newData);
   }, [formState, covidData]);
 
   //todo replace with progress bar

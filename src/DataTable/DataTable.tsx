@@ -9,10 +9,10 @@ interface Props {
 const formatData = (data: CountryDictionary) => {
   //todo consider another way to make an enum of types
   const columns = ['country', 'date', 'confirmed', 'deaths', 'recovered'];
-
+console.log('data', data);
   const dataSets = Object.entries(data).map(([country, dataPoints]) => {
+    console.log('country', country);
     //todo country is index instead of name, fix that
-    // console.log('country', country);
     return dataPoints.map((dataPoint) => [
       country,
       dataPoint.date,
