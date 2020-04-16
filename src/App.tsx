@@ -4,7 +4,7 @@ import { BaseForm } from './InputForm/BaseForm';
 import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
 import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
-import { CovidAPI } from './shared/API/CovidAPI';
+import { CovidAPI } from './shared/CovidAPI';
 import {
   CountryDictionary,
   CountryList,
@@ -63,7 +63,7 @@ const App = () => {
         setFormData={setFormData}
         countryList={countryList}
       />
-      <TimeSeriesPlot />
+      <TimeSeriesPlot data={selectedCovidData} />
       <DataTable data={selectedCovidData} />
       <ColorSelector />
     </div>
