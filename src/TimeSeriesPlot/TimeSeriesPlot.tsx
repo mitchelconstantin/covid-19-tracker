@@ -1,10 +1,8 @@
 import React from 'react';
-import {
-  CountryDictionary,
-  CountryColorDictionary,
-} from '../shared/Types';
+import { CountryDictionary, CountryColorDictionary } from '../shared/Types';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
+import { getDateHeaders } from '../shared/Behaviors';
 
 interface Props {
   data: CountryDictionary;
@@ -15,6 +13,8 @@ const getOptions = (
   data: CountryDictionary,
   countryColors: CountryColorDictionary
 ) => {
+  const categories = getDateHeaders(data);
+
   const series = Object.entries(data).map(([country, dataPoints]) => {
     let data = dataPoints.map((dataPoint) => dataPoint.confirmed);
     return { name: country, color: countryColors[country] || undefined, data };
@@ -25,12 +25,7 @@ const getOptions = (
     },
     series,
     xAxis: {
-      type: 'datetime',
-      // dateTimeLabelFormats: {
-      //   // don't display the dummy year
-      //   month: '%e. %b',
-      //   year: '%b',
-      // },
+      categories,
       title: {
         text: 'Date',
       },
@@ -43,7 +38,12 @@ const getOptions = (
     },
   };
 };
-// todo fix X axis dates
+
 export const TimeSeriesPlot = ({ data, countryColors }: Props) => {
-  return <HighchartsReact highcharts={Highcharts} options={getOptions(data, countryColors)} />;
+  return (
+    <HighchartsReact
+      highcharts={Highcharts}
+      options={getOptions(data, countryColors)}
+    />
+  );
 };
