@@ -10,7 +10,7 @@ import {
   defaultFormData,
   FormState,
 } from './shared/Types';
-import { AppBar, Tabs, Tab, Box, Typography } from '@material-ui/core';
+import { AppBar, Tabs, Tab, Box } from '@material-ui/core';
 
 //todo make sure this filters inclusively
 const filterData = (
@@ -20,9 +20,17 @@ const filterData = (
   const newData: CountryDictionary = {};
   formData.selectedCountries.forEach((country) => {
     const filteredData = covidData[country].filter(({ date }) => {
-      const formattedDataTime = new Date(date);
+      // hacky way to remove date offset
+      // https://stackoverflow.com/a/14569783
+      // todo improve this
+      const offsetDate = new Date(date);
+      const formattedDataTime = new Date(
+        offsetDate.getTime() - offsetDate.getTimezoneOffset() * -60000
+      );
+
       const formattedFromDate = new Date(formData.fromDate);
       const formattedToDate = new Date(formData.toDate);
+
       return (
         formattedDataTime >= formattedFromDate &&
         formattedDataTime <= formattedToDate
@@ -62,6 +70,7 @@ const App = () => {
     setSelectedCovidData(filterData(covidData, formData));
   }, [formData, covidData]);
 
+  console.log('selectedCovidData', selectedCovidData);
   //todo replace with progress bar
   if (loading) return <div>loading</div>;
 

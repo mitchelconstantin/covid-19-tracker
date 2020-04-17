@@ -18,6 +18,7 @@ export const DateSelect = ({ label, date, setDate }: Props) => {
       <KeyboardDatePicker
         disableToolbar
         variant="inline"
+        // todo use consistent date format
         format="MM/dd/yyyy"
         margin="normal"
         id="date-picker-inline"
