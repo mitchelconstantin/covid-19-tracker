@@ -12,6 +12,7 @@ import {
   FormState,
 } from './shared/Types';
 
+//todo make sure this filters inclusively
 const filterData = (
   covidData: CountryDictionary,
   formData: FormState

@@ -6,10 +6,17 @@ import HighchartsReact from 'highcharts-react-official';
 interface Props {
   data: CountryDictionary;
 }
+
+const countryColors = {
+  Afghanistan: '#ffc0cb',
+  Albania: '#ffff00',
+};
+
 const getOptions = (data: CountryDictionary) => {
   const series = Object.entries(data).map(([country, dataPoints]) => {
     let data = dataPoints.map((dataPoint) => dataPoint.confirmed);
-    return { name: country, data };
+    //@ts-ignore
+    return { name: country, color: countryColors[country] || undefined, data };
   });
   return {
     title: {
