@@ -11,6 +11,7 @@ import {
   FormState,
 } from './shared/Types';
 import { AppBar, Tabs, Tab, Box, LinearProgress } from '@material-ui/core';
+import { staticCountryList } from './shared/StaticCountryList';
 
 const filterData = (
   covidData: CountryDictionary,
@@ -44,7 +45,7 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
   const [covidData, setCovidData] = useState<CountryDictionary>({});
-  const [countryList, setCountryList] = useState<CountryList>([]);
+  const [countryList, setCountryList] = useState<CountryList>(staticCountryList);
   const [selectedCovidData, setSelectedCovidData] = useState<CountryDictionary>(
     {}
   );
@@ -67,11 +68,9 @@ const App = () => {
   useEffect(() => { //update filtered data when user input changes
    Object.keys(covidData).length && setSelectedCovidData(filterData(covidData, formData));
   }, [formData, covidData]);
-
-  if (loading) return <LinearProgress />;
-
   return (
     <div className="App">
+      {loading && <LinearProgress />}
       <BaseForm
         formData={formData}
         setFormData={setFormData}
