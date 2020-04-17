@@ -14,7 +14,7 @@ const formatData = (
   countryColors: CountryColorDictionary
 ) => {
   const columns = ['country', ...getDateHeaders(data)];
-
+//todo color data
   const rows = Object.entries(data).map(([country, dataPoints]) => {
     const rowData = dataPoints.map((dataPoint) => dataPoint.confirmed);
     const styledCountry = (

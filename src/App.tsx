@@ -10,9 +10,8 @@ import {
   defaultFormData,
   FormState,
 } from './shared/Types';
-import { AppBar, Tabs, Tab, Box } from '@material-ui/core';
+import { AppBar, Tabs, Tab, Box, LinearProgress } from '@material-ui/core';
 
-//todo make sure this filters inclusively
 const filterData = (
   covidData: CountryDictionary,
   formData: FormState
@@ -58,21 +57,19 @@ const App = () => {
     setTabIndex(newTabIndex);
   };
 
-  useEffect(() => {
+  useEffect(() => { //initial data fetch
     CovidAPI.getAll().then(({ fullData, countries }) => {
       setCovidData(fullData);
       setCountryList(countries);
       setLoading(false);
     });
   }, []);
-
-  useEffect(() => {
-    setSelectedCovidData(filterData(covidData, formData));
+  useEffect(() => { //update filtered data when user input changes
+   Object.keys(covidData).length && setSelectedCovidData(filterData(covidData, formData));
   }, [formData, covidData]);
 
-  //todo replace with progress bar
-  if (loading) return <div>loading</div>;
-
+  if (loading) return <LinearProgress />;
+  
   return (
     <div className="App">
       <BaseForm
