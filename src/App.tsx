@@ -64,9 +64,12 @@ const App = () => {
         setFormData={setFormData}
         countryList={countryList}
       />
-      <TimeSeriesPlot data={selectedCovidData} />
+      <TimeSeriesPlot
+        data={selectedCovidData}
+        countryColors={formData.countryColors}
+      />
       <DataTable data={selectedCovidData} />
-      <ColorSelector />
+      <ColorSelector formData={formData} setFormData={setFormData} />
     </div>
   );
 };

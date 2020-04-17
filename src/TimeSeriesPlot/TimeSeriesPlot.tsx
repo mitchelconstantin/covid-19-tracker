@@ -1,21 +1,22 @@
 import React from 'react';
-import { CountryDictionary } from '../shared/Types';
+import {
+  CountryDictionary,
+  CountryColorDictionary,
+} from '../shared/Types';
 import Highcharts from 'highcharts/highstock';
 import HighchartsReact from 'highcharts-react-official';
 
 interface Props {
   data: CountryDictionary;
+  countryColors: CountryColorDictionary;
 }
 
-const countryColors = {
-  Afghanistan: '#ffc0cb',
-  Albania: '#ffff00',
-};
-
-const getOptions = (data: CountryDictionary) => {
+const getOptions = (
+  data: CountryDictionary,
+  countryColors: CountryColorDictionary
+) => {
   const series = Object.entries(data).map(([country, dataPoints]) => {
     let data = dataPoints.map((dataPoint) => dataPoint.confirmed);
-    //@ts-ignore
     return { name: country, color: countryColors[country] || undefined, data };
   });
   return {
@@ -43,6 +44,6 @@ const getOptions = (data: CountryDictionary) => {
   };
 };
 // todo fix X axis dates
-export const TimeSeriesPlot = ({ data }: Props) => {
-  return <HighchartsReact highcharts={Highcharts} options={getOptions(data)} />;
+export const TimeSeriesPlot = ({ data, countryColors }: Props) => {
+  return <HighchartsReact highcharts={Highcharts} options={getOptions(data, countryColors)} />;
 };
