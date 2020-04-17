@@ -7,18 +7,18 @@ interface Props {
 }
 
 const formatData = (data: CountryDictionary) => {
-  const columns = ['country'];
+  const columns = [];
   for (let key in data) {
     const columnData = data[key].map(({ date }) => date);
-    columns.push(...columnData);
+    columns.push('country', ...columnData);
     break;
   };
-  //@ts-ignore
+
+  
   const rows = Object.entries(data).map(([country, dataPoints]) => {
     const rowData = dataPoints.map((dataPoint) => dataPoint.confirmed);
     return [country, ...rowData];
   });
-
   return { columns, rows };
 };
 //todo see render errors in console and fix
@@ -27,7 +27,7 @@ export const DataTable = ({ data }: Props) => {
 
   return (
     <MUIDataTable
-      title={'Confirmed Cases by date'}
+      title={'Confirmed Cases by Date'}
       data={rows}
       columns={columns}
     />
