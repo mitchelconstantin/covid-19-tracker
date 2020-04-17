@@ -10,12 +10,11 @@ import {
   Chip,
   MenuItem,
 } from '@material-ui/core';
-import { CountryList } from '../../shared/Types';
+import { countryList } from '../../shared/countryList';
 
 interface Props {
   selectedCountries: any;
   setSelectedCountries: any;
-  countryList: CountryList;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -52,7 +51,6 @@ const MenuProps = {
 export const CountrySelect = ({
   selectedCountries,
   setSelectedCountries,
-  countryList,
 }: Props) => {
   const classes = useStyles();
   const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
@@ -61,7 +59,7 @@ export const CountrySelect = ({
 // todo fix jank when selecting multiple countries
   return (
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Select Countries</InputLabel>
+        <InputLabel id="demo-mutiple-chip-label">Countries</InputLabel>
         <Select
           labelId="demo-mutiple-chip-label"
           id="demo-mutiple-chip"

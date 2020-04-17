@@ -4,14 +4,8 @@ import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
 import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/CovidAPI';
-import {
-  CountryDictionary,
-  CountryList,
-  defaultFormData,
-  FormState,
-} from './shared/Types';
+import { CountryDictionary, defaultFormData, FormState } from './shared/Types';
 import { AppBar, Tabs, Tab, Box, LinearProgress } from '@material-ui/core';
-import { staticCountryList } from './shared/StaticCountryList';
 
 const filterData = (
   covidData: CountryDictionary,
@@ -45,7 +39,6 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
   const [covidData, setCovidData] = useState<CountryDictionary>({});
-  const [countryList, setCountryList] = useState<CountryList>(staticCountryList);
   const [selectedCovidData, setSelectedCovidData] = useState<CountryDictionary>(
     {}
   );
@@ -58,24 +51,22 @@ const App = () => {
     setTabIndex(newTabIndex);
   };
 
-  useEffect(() => { //initial data fetch
+  useEffect(() => {
+    //initial data fetch
     CovidAPI.getAll().then(({ fullData, countries }) => {
       setCovidData(fullData);
-      setCountryList(countries);
       setLoading(false);
     });
   }, []);
-  useEffect(() => { //update filtered data when user input changes
-   Object.keys(covidData).length && setSelectedCovidData(filterData(covidData, formData));
+  useEffect(() => {
+    //update filtered data when user input changes
+    Object.keys(covidData).length &&
+      setSelectedCovidData(filterData(covidData, formData));
   }, [formData, covidData]);
   return (
     <div className="App">
       {loading && <LinearProgress />}
-      <BaseForm
-        formData={formData}
-        setFormData={setFormData}
-        countryList={countryList}
-      />
+      <BaseForm formData={formData} setFormData={setFormData} />
       <AppBar position="static">
         <Tabs value={tabIndex} onChange={handleChangeTab}>
           <Tab label="Data View" />

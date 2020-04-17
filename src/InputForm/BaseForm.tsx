@@ -1,17 +1,15 @@
 import React from 'react';
 import { DateSelect } from './Components/DateSelect';
 import { CountrySelect } from './Components/CountrySelect';
-import { CountryList } from '../shared/Types';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 interface Props {
   formData: any;
   setFormData: any;
-  countryList: CountryList;
 }
 //todo fix any types
-export const BaseForm = ({ formData, setFormData, countryList }: Props) => {
+export const BaseForm = ({ formData, setFormData }: Props) => {
   const setFromDate = (fromDate: string) => {
     setFormData((prev: any) => ({ ...prev, fromDate }));
   };
@@ -34,7 +32,6 @@ export const BaseForm = ({ formData, setFormData, countryList }: Props) => {
       <CountrySelect
         selectedCountries={formData.selectedCountries}
         setSelectedCountries={setSelectedCountries}
-        countryList={countryList}
       />
     </MuiPickersUtilsProvider>
   );
