@@ -9,6 +9,10 @@ interface Props {
   countryColors: CountryColorDictionary;
 }
 
+const coloredText = (text: string | number, color: string) => (
+  <Typography style={{ color }}>{text}</Typography>
+);
+
 const formatData = (
   data: CountryDictionary,
   countryColors: CountryColorDictionary
@@ -16,17 +20,16 @@ const formatData = (
   const columns = ['country', ...getDateHeaders(data)];
 
   const rows = Object.entries(data).map(([country, dataPoints]) => {
-    const rowData = dataPoints.map((dataPoint) => dataPoint.confirmed);
-    const styledCountry = (
-      <Typography style={{ color: countryColors[country] || 'black' }}>
-        {country}
-      </Typography>
+    const countryColor = countryColors[country] || 'black';
+    const rowData = dataPoints.map((dataPoint) =>
+      coloredText(dataPoint.confirmed, countryColor)
     );
-    return [styledCountry, ...rowData];
+
+    return [coloredText(country, countryColor), ...rowData];
   });
   return { columns, rows };
 };
-//todo see render errors in console and fix
+
 export const DataTable = ({ data, countryColors }: Props) => {
   const { columns, rows } = formatData(data, countryColors);
 
