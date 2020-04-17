@@ -13,8 +13,6 @@ export const DateSelect = ({ label, date, setDate }: Props) => {
     var result = date && convertTime(date);
     setDate(result);
   };
-
-  console.log('using this date', date);
   //todo add to/from before/after validation
   return (
       <KeyboardDatePicker

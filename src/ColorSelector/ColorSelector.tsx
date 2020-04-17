@@ -1,6 +1,5 @@
 import React from 'react';
-import { CountryColorDictionary, FormState } from '../shared/Types';
-//@ts-ignore
+import { FormState } from '../shared/Types';
 import { SliderPicker } from 'react-color';
 
 //todo remove any
@@ -12,17 +11,18 @@ interface Props {
 export const ColorSelector = ({ formData, setFormData }: Props) => {
   const countryColors = formData.countryColors;
   const selectedCountries = formData.selectedCountries;
-  
+
   //@ts-ignore
   const handleChangeComplete = (hex, country) => {
-    console.log('got hex value', hex, ' for country ', country);
-    //@ts-ignore
     setFormData((prev: any) => ({
       ...prev,
       countryColors: { ...countryColors, [country]: hex },
     }));
   };
 
+  if (!selectedCountries.length) {
+    return <div>you must select some countries before customizing colors</div>;
+  }
   return (
     <>
       <div>select a color</div>

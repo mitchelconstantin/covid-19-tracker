@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import { BaseForm } from './InputForm/BaseForm';
 import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
 import { ColorSelector } from './ColorSelector/ColorSelector';
@@ -11,6 +10,7 @@ import {
   defaultFormData,
   FormState,
 } from './shared/Types';
+import { AppBar, Tabs, Tab, Box } from '@material-ui/core';
 
 //todo make sure this filters inclusively
 const filterData = (
@@ -41,6 +41,14 @@ const App = () => {
   const [selectedCovidData, setSelectedCovidData] = useState<CountryDictionary>(
     {}
   );
+  const [tabIndex, setTabIndex] = useState(0);
+  const TabContent = Box;
+  const handleChangeTab = (
+    event: React.ChangeEvent<{}>,
+    newTabIndex: number
+  ) => {
+    setTabIndex(newTabIndex);
+  };
 
   useEffect(() => {
     CovidAPI.getAll().then(({ fullData, countries }) => {
@@ -64,12 +72,22 @@ const App = () => {
         setFormData={setFormData}
         countryList={countryList}
       />
-      <TimeSeriesPlot
-        data={selectedCovidData}
-        countryColors={formData.countryColors}
-      />
-      <DataTable data={selectedCovidData} />
-      <ColorSelector formData={formData} setFormData={setFormData} />
+      <AppBar position="static">
+        <Tabs value={tabIndex} onChange={handleChangeTab}>
+          <Tab label="Data View" />
+          <Tab label="Choose Colors" />
+        </Tabs>
+      </AppBar>
+      <TabContent hidden={tabIndex !== 0}>
+        <TimeSeriesPlot
+          data={selectedCovidData}
+          countryColors={formData.countryColors}
+        />
+        <DataTable data={selectedCovidData} />
+      </TabContent>
+      <TabContent hidden={tabIndex !== 1}>
+        <ColorSelector formData={formData} setFormData={setFormData} />
+      </TabContent>
     </div>
   );
 };
