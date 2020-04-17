@@ -53,7 +53,7 @@ const App = () => {
 
   useEffect(() => {
     //initial data fetch
-    CovidAPI.getAll().then(({ fullData, countries }) => {
+    CovidAPI.getAll().then(( fullData ) => {
       setCovidData(fullData);
       setLoading(false);
     });
