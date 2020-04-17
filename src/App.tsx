@@ -69,7 +69,7 @@ const App = () => {
   }, [formData, covidData]);
 
   if (loading) return <LinearProgress />;
-  
+
   return (
     <div className="App">
       <BaseForm

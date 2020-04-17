@@ -23,7 +23,6 @@ export const BaseForm = ({ formData, setFormData, countryList }: Props) => {
   const setSelectedCountries = (selectedCountries: any) => {
     setFormData((prev: any) => ({ ...prev, selectedCountries }));
   };
-
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <DateSelect

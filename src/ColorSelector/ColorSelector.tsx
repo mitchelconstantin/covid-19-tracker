@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormState } from '../shared/Types';
-import { SliderPicker } from 'react-color';
+import { GithubPicker } from 'react-color';
 
 //todo remove any
 interface Props {
@@ -27,15 +27,15 @@ export const ColorSelector = ({ formData, setFormData }: Props) => {
     <>
       <div>select a color</div>
       {selectedCountries.map((country) => (
-        <>
+        <div key={country}>
           <div>select a color for {country}</div>
-          <SliderPicker
+          <GithubPicker
             color={countryColors[country] || undefined}
             onChangeComplete={(color) =>
               handleChangeComplete(color.hex, country)
             }
           />
-        </>
+        </div>
       ))}
     </>
   );
