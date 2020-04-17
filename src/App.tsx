@@ -70,7 +70,6 @@ const App = () => {
     setSelectedCovidData(filterData(covidData, formData));
   }, [formData, covidData]);
 
-  console.log('selectedCovidData', selectedCovidData);
   //todo replace with progress bar
   if (loading) return <div>loading</div>;
 
