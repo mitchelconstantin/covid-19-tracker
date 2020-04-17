@@ -5,7 +5,7 @@ import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/CovidAPI';
 import { CountryDictionary, defaultFormData, FormState } from './shared/Types';
-import { AppBar, Tabs, Tab, Box, LinearProgress } from '@material-ui/core';
+import { AppBar, Tabs, Tab, Box } from '@material-ui/core';
 
 const filterData = (
   covidData: CountryDictionary,
@@ -36,7 +36,6 @@ const filterData = (
 };
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
   const [covidData, setCovidData] = useState<CountryDictionary>({});
   const [selectedCovidData, setSelectedCovidData] = useState<CountryDictionary>(
@@ -53,9 +52,8 @@ const App = () => {
 
   useEffect(() => {
     //initial data fetch
-    CovidAPI.getAll().then(( fullData ) => {
+    CovidAPI.getAll().then((fullData) => {
       setCovidData(fullData);
-      setLoading(false);
     });
   }, []);
   useEffect(() => {
@@ -65,7 +63,6 @@ const App = () => {
   }, [formData, covidData]);
   return (
     <div className="App">
-      {loading && <LinearProgress />}
       <BaseForm formData={formData} setFormData={setFormData} />
       <AppBar position="static">
         <Tabs value={tabIndex} onChange={handleChangeTab}>

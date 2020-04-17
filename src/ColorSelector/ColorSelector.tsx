@@ -17,12 +17,10 @@ export const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//todo remove any
 interface Props {
   formData: FormState;
-  setFormData: any;
+  setFormData: React.Dispatch<React.SetStateAction<FormState>>;
 }
-//todo fix any types
 export const ColorSelector = ({ formData, setFormData }: Props) => {
   const classes = useStyles();
   const countryColors = formData.countryColors;
@@ -30,7 +28,7 @@ export const ColorSelector = ({ formData, setFormData }: Props) => {
 
   //@ts-ignore
   const handleChangeComplete = (hex, country) => {
-    setFormData((prev: any) => ({
+    setFormData((prev: FormState) => ({
       ...prev,
       countryColors: { ...countryColors, [country]: hex },
     }));

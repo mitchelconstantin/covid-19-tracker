@@ -5,7 +5,7 @@ import { KeyboardDatePicker } from '@material-ui/pickers';
 interface Props {
   label: string;
   date: string;
-  setDate: any;
+  setDate: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const DateSelect = ({ label, date, setDate }: Props) => {

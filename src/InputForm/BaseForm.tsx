@@ -3,23 +3,24 @@ import { DateSelect } from './Components/DateSelect';
 import { CountrySelect } from './Components/CountrySelect';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { FormState, CountryList } from '../shared/Types';
 
 interface Props {
-  formData: any;
-  setFormData: any;
+  formData: FormState;
+  setFormData: React.Dispatch<React.SetStateAction<FormState>>;
 }
-//todo fix any types
+
 export const BaseForm = ({ formData, setFormData }: Props) => {
   const setFromDate = (fromDate: string) => {
-    setFormData((prev: any) => ({ ...prev, fromDate }));
+    setFormData((prev: FormState) => ({ ...prev, fromDate }));
   };
 
   const setToDate = (toDate: string) => {
-    setFormData((prev: any) => ({ ...prev, toDate }));
+    setFormData((prev: FormState) => ({ ...prev, toDate }));
   };
 
-  const setSelectedCountries = (selectedCountries: any) => {
-    setFormData((prev: any) => ({ ...prev, selectedCountries }));
+  const setSelectedCountries = (selectedCountries: CountryList) => {
+    setFormData((prev: FormState) => ({ ...prev, selectedCountries }));
   };
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>

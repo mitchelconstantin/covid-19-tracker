@@ -11,10 +11,11 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { countryList } from '../../shared/countryList';
+import { CountryList } from '../../shared/Types';
 
 interface Props {
-  selectedCountries: any;
-  setSelectedCountries: any;
+  selectedCountries: CountryList;
+  setSelectedCountries: React.Dispatch<React.SetStateAction<CountryList>>;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -53,7 +54,7 @@ export const CountrySelect = ({
   setSelectedCountries,
 }: Props) => {
   const classes = useStyles();
-  const handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+  const handleChange = (event: React.ChangeEvent<{ value: CountryList }>) => {
     setSelectedCountries(event.target.value);
   };
 // todo fix jank when selecting multiple countries

@@ -32,12 +32,17 @@ const formatData = (
 
 export const DataTable = ({ data, countryColors }: Props) => {
   const { columns, rows } = formatData(data, countryColors);
+  const options = {
+    selectableRows: 'none',
+  };
 
   return (
     <MUIDataTable
       title={'Confirmed Cases by Date'}
       data={rows}
       columns={columns}
+      //@ts-ignore
+      options={options}
     />
   );
 };
