@@ -10,7 +10,7 @@ import {
   defaultFormData,
   FormState,
 } from './shared/Types';
-import { AppBar, Tabs, Tab, Box } from '@material-ui/core';
+import { AppBar, Tabs, Tab, Box, Typography } from '@material-ui/core';
 
 //todo make sure this filters inclusively
 const filterData = (
@@ -83,7 +83,10 @@ const App = () => {
           data={selectedCovidData}
           countryColors={formData.countryColors}
         />
-        <DataTable data={selectedCovidData} />
+        <DataTable
+          data={selectedCovidData}
+          countryColors={formData.countryColors}
+        />
       </TabContent>
       <TabContent hidden={tabIndex !== 1}>
         <ColorSelector formData={formData} setFormData={setFormData} />
