@@ -4,12 +4,12 @@ import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
 import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/CovidAPI';
-import { CountryDictionary, defaultFormData, FormState } from './shared/Types';
+import { CountryDictionary, defaultFormData, FormData } from './shared/Types';
 import { AppBar, Tabs, Tab, Box } from '@material-ui/core';
 
 const filterData = (
   covidData: CountryDictionary,
-  formData: FormState
+  formData: FormData
 ): CountryDictionary => {
   const newData: CountryDictionary = {};
   formData.selectedCountries.forEach((country) => {

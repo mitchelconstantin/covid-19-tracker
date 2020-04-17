@@ -14,8 +14,8 @@ export interface CountryDictionary {
 export interface CountryColorDictionary {
   [countryName: string]: string;
 }
-//todo rename formstate
-export interface FormState {
+
+export interface FormData {
   toDate: string;
   fromDate: string;
   selectedCountries: CountryList;

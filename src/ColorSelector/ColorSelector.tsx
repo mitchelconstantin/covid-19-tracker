@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormState } from '../shared/Types';
+import { FormData } from '../shared/Types';
 import { GithubPicker } from 'react-color';
 import { Box, Typography, makeStyles } from '@material-ui/core';
 
@@ -18,8 +18,8 @@ export const useStyles = makeStyles((theme) => ({
 }));
 
 interface Props {
-  formData: FormState;
-  setFormData: React.Dispatch<React.SetStateAction<FormState>>;
+  formData: FormData;
+  setFormData: React.Dispatch<React.SetStateAction<FormData>>;
 }
 export const ColorSelector = ({ formData, setFormData }: Props) => {
   const classes = useStyles();
@@ -28,7 +28,7 @@ export const ColorSelector = ({ formData, setFormData }: Props) => {
 
   //@ts-ignore
   const handleChangeComplete = (hex, country) => {
-    setFormData((prev: FormState) => ({
+    setFormData((prev: FormData) => ({
       ...prev,
       countryColors: { ...countryColors, [country]: hex },
     }));
