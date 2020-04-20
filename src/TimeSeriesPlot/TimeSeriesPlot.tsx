@@ -19,13 +19,9 @@ const getOptions = (
     let data = dataPoints.map((dataPoint) => dataPoint.confirmed);
     return { name: country, color: countryColors[country] || undefined, data };
   });
-  let text = 'Confirmed COVID-19 Cases';
-  if (!series.length) {
-    text += ' (Select countries to get started)';
-  }
   return {
     title: {
-      text,
+      text: 'Confirmed COVID-19 Cases',
     },
     series,
     xAxis: {

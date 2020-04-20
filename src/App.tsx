@@ -38,6 +38,9 @@ const useStyles = makeStyles(() => ({
     alignItems: 'center',
     marginTop: '20px',
   },
+  loading: {
+    marginTop: '35vh',
+  },
 }));
 
 const filterData = (
@@ -115,9 +118,10 @@ const App = () => {
       <TabContent hidden={tabIndex !== 0}>
         <Box className={classes.dataTab}>
           {loading ? (
-            <CircularProgress 
-            disableShrink
-            color='secondary'
+            <CircularProgress
+              className={classes.loading}
+              disableShrink
+              color="secondary"
             />
           ) : (
             <>

@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     countrySelect: {
       minHeight: '40px',
+      marginBottom: '8px'
     },
   })
 );
