@@ -13,21 +13,18 @@ export const DateSelect = ({ label, date, setDate }: Props) => {
     var result = date && convertTime(date);
     setDate(result);
   };
-  //todo add to/from before/after validation
   return (
-      <KeyboardDatePicker
-        disableToolbar
-        variant="inline"
-        // todo use consistent date format
-        format="MM/dd/yyyy"
-        margin="normal"
-        id="date-picker-inline"
-        label={label}
-        value={date}
-        onChange={handleDateChange}
-        KeyboardButtonProps={{
-          'aria-label': 'change date',
-        }}
-      />
+    <KeyboardDatePicker
+      disableToolbar
+      variant="inline"
+      format="yyyy-MM-dd"
+      margin="normal"
+      label={label}
+      value={date}
+      onChange={handleDateChange}
+      KeyboardButtonProps={{
+        'aria-label': 'change date',
+      }}
+    />
   );
 };

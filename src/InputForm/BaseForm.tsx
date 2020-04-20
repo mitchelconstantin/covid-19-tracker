@@ -20,15 +20,17 @@ export const BaseForm = ({ formData, setFormData }: Props) => {
   };
 
   const setSelectedCountries = (selectedCountries: CountryList) => {
+    //todo add random color selection so that country colors match between grid and chart automatically
     setFormData((prev: FormData) => ({ ...prev, selectedCountries }));
   };
+  // todo
+  // add validation
+  // from date: greater than beginning of API () && less than toDate
+  // to date: greater than from date () && less than or equal to today
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <DateSelect
-        label="from"
-        date={formData.fromDate}
-        setDate={setFromDate}
-      />
+      <DateSelect label="from" date={formData.fromDate} setDate={setFromDate} />
       <DateSelect label="to" date={formData.toDate} setDate={setToDate} />
       <CountrySelect
         selectedCountries={formData.selectedCountries}

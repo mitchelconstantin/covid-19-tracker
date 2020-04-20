@@ -50,14 +50,14 @@ const App = () => {
     setTabIndex(newTabIndex);
   };
 
+  //initial data fetch
   useEffect(() => {
-    //initial data fetch
     CovidAPI.getAll().then((fullData) => {
       setCovidData(fullData);
     });
   }, []);
+  //update filtered data when user input changes
   useEffect(() => {
-    //update filtered data when user input changes
     Object.keys(covidData).length &&
       setSelectedCovidData(filterData(covidData, formData));
   }, [formData, covidData]);
