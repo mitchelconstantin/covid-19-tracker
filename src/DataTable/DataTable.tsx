@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: '20px',
     marginBottom: '20px',
-    width: '80vw'
+    width: '80vw',
   },
 }));
 
@@ -48,7 +48,6 @@ export const DataTable = ({ data, countryColors }: Props) => {
   return (
     <Box className={classes.container} data-testid={'data-table'}>
       <MUIDataTable
-        title={'Confirmed Cases by Date'}
         data={rows}
         columns={columns}
         //@ts-ignore
