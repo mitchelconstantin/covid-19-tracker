@@ -13,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column'
+      flexDirection: 'column',
     },
-    
   },
   countrySelect: {
     width: '30%',
@@ -39,12 +38,9 @@ export const BaseForm = ({ formData, setFormData }: Props) => {
   };
 
   const setSelectedCountries = (selectedCountries: CountryList) => {
-    //todo add random color selection so that country colors match between grid and chart automatically
     setFormData((prev: FormData) => ({ ...prev, selectedCountries }));
   };
-  // todo: add validation
-  // from date: greater than beginning of API () && less than toDate
-  // to date: greater than from date () && less than or equal to today
+
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Box data-testid="base-form" className={classes.container}>

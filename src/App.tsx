@@ -50,9 +50,7 @@ const filterData = (
   const newData: CountryDictionary = {};
   formData.selectedCountries.forEach((country) => {
     const filteredData = covidData[country].filter(({ date }) => {
-      // hacky way to remove date offset
       // https://stackoverflow.com/a/14569783
-      // todo improve this
       const offsetDate = new Date(date);
       const formattedDataTime = new Date(
         offsetDate.getTime() - offsetDate.getTimezoneOffset() * -60000
