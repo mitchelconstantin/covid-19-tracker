@@ -1,8 +1,15 @@
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import { CountryDictionary, CountryColorDictionary } from '../shared/Types';
-import { Typography } from '@material-ui/core';
+import { Box, Typography, makeStyles } from '@material-ui/core';
 import { getDateHeaders } from '../shared/Behaviors';
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    marginTop: '20px',
+    marginBottom: '20px',
+  },
+}));
 
 interface Props {
   data: CountryDictionary;
@@ -31,13 +38,14 @@ const formatData = (
 };
 
 export const DataTable = ({ data, countryColors }: Props) => {
+  const classes = useStyles();
   const { columns, rows } = formatData(data, countryColors);
   const options = {
     selectableRows: 'none',
   };
 
   return (
-    <div data-testid={'data-table'}>
+    <Box className={classes.container} data-testid={'data-table'}>
       <MUIDataTable
         title={'Confirmed Cases by Date'}
         data={rows}
@@ -45,6 +53,6 @@ export const DataTable = ({ data, countryColors }: Props) => {
         //@ts-ignore
         options={options}
       />
-    </div>
+    </Box>
   );
 };

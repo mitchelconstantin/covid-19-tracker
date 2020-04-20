@@ -24,8 +24,12 @@ const useStyles = makeStyles(() => ({
   },
   tabs: {
     color: 'black',
-    // backgroundColor: 'white',
-    // boxShadow: '0',
+  },
+  dataTab: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '20px'
   },
 }));
 
@@ -100,17 +104,15 @@ const App = () => {
         </Tabs>
       </AppBar>
       <TabContent hidden={tabIndex !== 0}>
-        <Box
-        margin='20px'
-        >
-        <TimeSeriesPlot
-          data={selectedCovidData}
-          countryColors={formData.countryColors}
-        />
-        <DataTable
-          data={selectedCovidData}
-          countryColors={formData.countryColors}
-        />
+        <Box className={classes.dataTab}>
+          <TimeSeriesPlot
+            data={selectedCovidData}
+            countryColors={formData.countryColors}
+          />
+          <DataTable
+            data={selectedCovidData}
+            countryColors={formData.countryColors}
+          />
         </Box>
       </TabContent>
       <TabContent hidden={tabIndex !== 1}>

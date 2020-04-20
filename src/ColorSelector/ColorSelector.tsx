@@ -39,11 +39,15 @@ export const ColorSelector = ({ formData, setFormData }: Props) => {
   return (
     <Box className={classes.container} data-testid="color-selector">
       {!selectedCountries.length ? (
-        <div>you must select some countries before customizing colors</div>
+        <Typography>
+          you must select some countries before customizing colors
+        </Typography>
       ) : (
         selectedCountries.map((country) => (
           <Box className={classes.countrySelect} key={country}>
-            <Typography style={{ color: countryColors[country], maxWidth: '100%' }}>
+            <Typography
+              style={{ color: countryColors[country], maxWidth: '100%' }}
+            >
               select a color for {country}
             </Typography>
             <GithubPicker

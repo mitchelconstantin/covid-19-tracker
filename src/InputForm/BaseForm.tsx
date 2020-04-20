@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column'
+    },
+    
   },
   countrySelect: {
     width: '30%',
