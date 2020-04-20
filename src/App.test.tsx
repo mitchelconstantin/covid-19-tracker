@@ -9,12 +9,14 @@ test('first tab should load by default, content should toggle when clicking tabs
   const dataTable = getByTestId('data-table');
   const timeSeriesPlot = getByTestId('time-series-plot');
   const colorSelector = getByTestId('color-selector');
+  const aboutSection = getByTestId('about');
 
   const testDataViewTabRender = () => {
     expect(baseForm).toBeVisible();
     expect(timeSeriesPlot).toBeVisible();
     expect(dataTable).toBeVisible();
     expect(colorSelector).not.toBeVisible();
+    expect(aboutSection).not.toBeVisible();
   };
 
   const testColorSelectTabRender = () => {
@@ -22,6 +24,15 @@ test('first tab should load by default, content should toggle when clicking tabs
     expect(timeSeriesPlot).not.toBeVisible();
     expect(dataTable).not.toBeVisible();
     expect(colorSelector).toBeVisible();
+    expect(aboutSection).not.toBeVisible();
+  };
+
+  const testAboutTabRender = () => {
+    expect(baseForm).toBeVisible();
+    expect(timeSeriesPlot).not.toBeVisible();
+    expect(dataTable).not.toBeVisible();
+    expect(colorSelector).not.toBeVisible();
+    expect(aboutSection).toBeVisible();
   };
 
   testDataViewTabRender();
@@ -31,4 +42,7 @@ test('first tab should load by default, content should toggle when clicking tabs
 
   fireEvent.click(getByText('Data View'));
   testDataViewTabRender();
+
+  fireEvent.click(getByText('About'));
+  testAboutTabRender();
 });
