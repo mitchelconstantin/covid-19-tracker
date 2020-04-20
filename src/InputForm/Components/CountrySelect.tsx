@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   makeStyles,
   Theme,
@@ -10,10 +10,10 @@ import {
   Chip,
   MenuItem,
 } from '@material-ui/core';
-import { countryList } from '../../shared/countryList';
+import { fullCountryList } from '../../shared/fullCountryList';
 import { CountryList } from '../../shared/Types';
 
-interface Props {
+interface Props { 
   selectedCountries: CountryList;
   setSelectedCountries: React.Dispatch<React.SetStateAction<CountryList>>;
 }
@@ -35,6 +35,9 @@ const useStyles = makeStyles((theme: Theme) =>
     noLabel: {
       marginTop: theme.spacing(3),
     },
+    countrySelect: {
+      // height: '40px'
+    },
   })
 );
 
@@ -53,36 +56,46 @@ export const CountrySelect = ({
   selectedCountries,
   setSelectedCountries,
 }: Props) => {
+  const [localSelectedCountries, setLocalSelectedCountries] = useState<
+    CountryList
+  >(selectedCountries);
   const classes = useStyles();
   const handleChange = (event: React.ChangeEvent<{ value: CountryList }>) => {
-    setSelectedCountries(event.target.value);
+    setLocalSelectedCountries(event.target.value);
   };
-// todo fix jank when selecting multiple countries
+  const handleClose = () => {
+    setSelectedCountries(localSelectedCountries);
+  };
+  // todo fix jank when selecting multiple countries
   return (
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Countries</InputLabel>
-        <Select
-          labelId="demo-mutiple-chip-label"
-          id="demo-mutiple-chip"
-          multiple
-          value={selectedCountries}
-          onChange={handleChange}
-          input={<Input id="select-multiple-chip" />}
-          renderValue={(selected) => (
-            <div className={classes.chips}>
-              {(selected as string[]).map((value) => (
-                <Chip key={value} label={value} className={classes.chip} />
-              ))}
-            </div>
-          )}
-          MenuProps={MenuProps}
-        >
-          {countryList.map((country) => (
-            <MenuItem key={country} value={country}>
-              {country}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+    <FormControl className={classes.formControl}>
+      <InputLabel>Countries</InputLabel>
+      <Select
+        className={classes.countrySelect}
+        multiple
+        value={localSelectedCountries}
+        onChange={handleChange}
+        onClose={handleClose}
+        input={<Input id="select-multiple-chip" />}
+        renderValue={(countries: CountryList) => (
+          <div className={classes.chips}>
+            {countries.map((countryName) => (
+              <Chip
+                key={countryName}
+                label={countryName}
+                className={classes.chip}
+              />
+            ))}
+          </div>
+        )}
+        MenuProps={MenuProps}
+      >
+        {fullCountryList.map((country) => (
+          <MenuItem key={country} value={country}>
+            {country}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
