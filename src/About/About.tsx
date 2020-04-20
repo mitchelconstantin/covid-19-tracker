@@ -31,8 +31,8 @@ export const About = () => {
       </Typography>
       <Typography className={classes.text}>
         If you want to assign custom colors to the countries you have selected,
-        click on the CHOOSE COLORS tabs below. Those colors will be reflected in
-        the chart and graph in the Data View tab.
+        click on the 'choose colors' tab above. Those colors will be reflected in
+        the chart and graph in the 'Data View' tab.
       </Typography>
     </Box>
   );
