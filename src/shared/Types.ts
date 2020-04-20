@@ -22,7 +22,7 @@ export interface FormData {
   countryColors: CountryColorDictionary;
 }
 
-export const defaultFormData = {
+export const defaultFormData: FormData = {
   toDate: today(),
   fromDate: tenDaysAgo(),
   selectedCountries: [],
