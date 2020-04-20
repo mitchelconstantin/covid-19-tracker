@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginTop: '20px',
     marginBottom: '20px',
+    width: '80vw'
   },
 }));
 
