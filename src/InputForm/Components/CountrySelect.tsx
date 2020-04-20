@@ -13,7 +13,7 @@ import {
 import { fullCountryList } from '../../shared/fullCountryList';
 import { CountryList } from '../../shared/Types';
 
-interface Props { 
+interface Props {
   selectedCountries: CountryList;
   setSelectedCountries: React.Dispatch<React.SetStateAction<CountryList>>;
 }
@@ -72,6 +72,7 @@ export const CountrySelect = ({
       <InputLabel>Countries</InputLabel>
       <Select
         className={classes.countrySelect}
+        data-testid="country-input"
         multiple
         value={localSelectedCountries}
         onChange={handleChange}

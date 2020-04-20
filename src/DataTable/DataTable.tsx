@@ -37,12 +37,14 @@ export const DataTable = ({ data, countryColors }: Props) => {
   };
 
   return (
-    <MUIDataTable
-      title={'Confirmed Cases by Date'}
-      data={rows}
-      columns={columns}
-      //@ts-ignore
-      options={options}
-    />
+    <div data-testid={'data-table'}>
+      <MUIDataTable
+        title={'Confirmed Cases by Date'}
+        data={rows}
+        columns={columns}
+        //@ts-ignore
+        options={options}
+      />
+    </div>
   );
 };

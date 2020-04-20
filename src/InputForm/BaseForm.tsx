@@ -30,12 +30,18 @@ export const BaseForm = ({ formData, setFormData }: Props) => {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <DateSelect label="from" date={formData.fromDate} setDate={setFromDate} />
-      <DateSelect label="to" date={formData.toDate} setDate={setToDate} />
-      <CountrySelect
-        selectedCountries={formData.selectedCountries}
-        setSelectedCountries={setSelectedCountries}
-      />
+      <div data-testid="base-form">
+        <DateSelect
+          label="from"
+          date={formData.fromDate}
+          setDate={setFromDate}
+        />
+        <DateSelect label="to" date={formData.toDate} setDate={setToDate} />
+        <CountrySelect
+          selectedCountries={formData.selectedCountries}
+          setSelectedCountries={setSelectedCountries}
+        />
+      </div>
     </MuiPickersUtilsProvider>
   );
 };

@@ -34,22 +34,23 @@ export const ColorSelector = ({ formData, setFormData }: Props) => {
     }));
   };
 
-  if (!selectedCountries.length) {
-    return <div>you must select some countries before customizing colors</div>;
-  }
   return (
-    <Box className={classes.container}>
-      {selectedCountries.map((country) => (
-        <Box className={classes.countrySelect} key={country}>
-          <Typography>select a color for {country}</Typography>
-          <GithubPicker
-            color={countryColors[country] || undefined}
-            onChangeComplete={(color) =>
-              handleChangeComplete(color.hex, country)
-            }
-          />
-        </Box>
-      ))}
+    <Box className={classes.container} data-testid="color-selector">
+      {!selectedCountries.length ? (
+        <div>you must select some countries before customizing colors</div>
+      ) : (
+        selectedCountries.map((country) => (
+          <Box className={classes.countrySelect} key={country}>
+            <Typography>select a color for {country}</Typography>
+            <GithubPicker
+              color={countryColors[country] || undefined}
+              onChangeComplete={(color) =>
+                handleChangeComplete(color.hex, country)
+              }
+            />
+          </Box>
+        ))
+      )}
     </Box>
   );
 };

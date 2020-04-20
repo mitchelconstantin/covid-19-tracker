@@ -41,9 +41,11 @@ const getOptions = (
 
 export const TimeSeriesPlot = ({ data, countryColors }: Props) => {
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      options={getOptions(data, countryColors)}
-    />
+    <div data-testid="time-series-plot">
+      <HighchartsReact
+        highcharts={Highcharts}
+        options={getOptions(data, countryColors)}
+      />
+    </div>
   );
 };

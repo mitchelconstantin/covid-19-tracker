@@ -3,15 +3,16 @@ import { render } from '@testing-library/react';
 import { BaseForm } from './BaseForm';
 import { defaultFormData } from '../shared/Types';
 
-test('renders learn react link', () => {
+test('renders all three selector components', () => {
   const mockSetFormData = jest.fn();
-  const { getByText, getByTestId } = render(
+  const { getByTestId } = render(
     <BaseForm formData={defaultFormData} setFormData={mockSetFormData} />
   );
-  // const linkElement = getByText('Countries');
-  const fromDate = getByTestId('from-input');
-  const toDate = getByTestId('to-input');
+  const fromDateSelector = getByTestId('from-input');
+  const toDateSelector = getByTestId('to-input');
+  const countrySelector = getByTestId('country-input');
 
-  expect(fromDate).toBeInTheDocument();
-  expect(toDate).toBeInTheDocument();
+  expect(fromDateSelector).toBeVisible();
+  expect(toDateSelector).toBeVisible();
+  expect(countrySelector).toBeVisible();
 });
