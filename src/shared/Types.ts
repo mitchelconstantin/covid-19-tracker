@@ -25,6 +25,6 @@ export interface FormData {
 export const defaultFormData: FormData = {
   toDate: today(),
   fromDate: tenDaysAgo(),
-  selectedCountries: [],
+  selectedCountries: ['US'],
   countryColors: {},
 };

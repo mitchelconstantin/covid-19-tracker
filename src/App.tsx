@@ -6,7 +6,14 @@ import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/CovidAPI';
 import { About } from './About/About';
 import { CountryDictionary, defaultFormData, FormData } from './shared/Types';
-import { AppBar, Tabs, Tab, Box, makeStyles } from '@material-ui/core';
+import {
+  AppBar,
+  Tabs,
+  Tab,
+  Box,
+  makeStyles,
+  CircularProgress,
+} from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -62,6 +69,7 @@ const filterData = (
 };
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
   const [covidData, setCovidData] = useState<CountryDictionary>({});
   const [selectedCovidData, setSelectedCovidData] = useState<CountryDictionary>(
@@ -81,6 +89,7 @@ const App = () => {
   useEffect(() => {
     CovidAPI.getAll().then((fullData) => {
       setCovidData(fullData);
+      setLoading(false);
     });
   }, []);
   //update filtered data when user input changes
@@ -105,14 +114,23 @@ const App = () => {
       </AppBar>
       <TabContent hidden={tabIndex !== 0}>
         <Box className={classes.dataTab}>
-          <TimeSeriesPlot
-            data={selectedCovidData}
-            countryColors={formData.countryColors}
-          />
-          <DataTable
-            data={selectedCovidData}
-            countryColors={formData.countryColors}
-          />
+          {loading ? (
+            <CircularProgress 
+            disableShrink
+            color='secondary'
+            />
+          ) : (
+            <>
+              <TimeSeriesPlot
+                data={selectedCovidData}
+                countryColors={formData.countryColors}
+              />
+              <DataTable
+                data={selectedCovidData}
+                countryColors={formData.countryColors}
+              />
+            </>
+          )}
         </Box>
       </TabContent>
       <TabContent hidden={tabIndex !== 1}>
