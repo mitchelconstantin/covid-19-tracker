@@ -69,6 +69,7 @@ const App = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const classes = useStyles();
   const TabContent = Box;
+
   const handleChangeTab = (
     event: React.ChangeEvent<{}>,
     newTabIndex: number
