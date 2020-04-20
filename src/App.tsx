@@ -4,6 +4,7 @@ import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
 import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/CovidAPI';
+import { About } from './About/About';
 import { CountryDictionary, defaultFormData, FormData } from './shared/Types';
 import { AppBar, Tabs, Tab, Box, makeStyles } from '@material-ui/core';
 
@@ -22,7 +23,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: 'lightGrey',
   },
   tabs: {
-    color: 'black'
+    color: 'black',
     // backgroundColor: 'white',
     // boxShadow: '0',
   },
@@ -95,9 +96,13 @@ const App = () => {
         >
           <Tab label="Data View" />
           <Tab label="Choose Colors" />
+          <Tab label="About" />
         </Tabs>
       </AppBar>
       <TabContent hidden={tabIndex !== 0}>
+        <Box
+        margin='20px'
+        >
         <TimeSeriesPlot
           data={selectedCovidData}
           countryColors={formData.countryColors}
@@ -106,9 +111,13 @@ const App = () => {
           data={selectedCovidData}
           countryColors={formData.countryColors}
         />
+        </Box>
       </TabContent>
       <TabContent hidden={tabIndex !== 1}>
         <ColorSelector formData={formData} setFormData={setFormData} />
+      </TabContent>
+      <TabContent hidden={tabIndex !== 2}>
+        <About />
       </TabContent>
     </div>
   );

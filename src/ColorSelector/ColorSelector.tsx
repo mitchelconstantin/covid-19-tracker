@@ -41,7 +41,9 @@ export const ColorSelector = ({ formData, setFormData }: Props) => {
       ) : (
         selectedCountries.map((country) => (
           <Box className={classes.countrySelect} key={country}>
-            <Typography>select a color for {country}</Typography>
+            <Typography style={{ color: countryColors[country] }}>
+              select a color for {country}
+            </Typography>
             <GithubPicker
               color={countryColors[country] || undefined}
               onChangeComplete={(color) =>
