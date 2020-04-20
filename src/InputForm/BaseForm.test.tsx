@@ -5,9 +5,13 @@ import { defaultFormData } from '../shared/Types';
 
 test('renders learn react link', () => {
   const mockSetFormData = jest.fn();
-  const { getByText } = render(
+  const { getByText, getByTestId } = render(
     <BaseForm formData={defaultFormData} setFormData={mockSetFormData} />
   );
-  const linkElement = getByText('Countries');
-  expect(linkElement).toBeInTheDocument();
+  // const linkElement = getByText('Countries');
+  const fromDate = getByTestId('from-input');
+  const toDate = getByTestId('to-input');
+
+  expect(fromDate).toBeInTheDocument();
+  expect(toDate).toBeInTheDocument();
 });

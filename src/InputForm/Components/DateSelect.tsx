@@ -16,6 +16,7 @@ export const DateSelect = ({ label, date, setDate }: Props) => {
   return (
     <KeyboardDatePicker
       disableToolbar
+      data-testid={`${label}-input`}
       variant="inline"
       format="yyyy-MM-dd"
       margin="normal"
