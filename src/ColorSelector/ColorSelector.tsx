@@ -12,8 +12,10 @@ const useStyles = makeStyles((theme) => ({
     position: 'static',
   },
   countrySelect: {
-    width: '30%',
     margin: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
 }));
 
@@ -41,7 +43,7 @@ export const ColorSelector = ({ formData, setFormData }: Props) => {
       ) : (
         selectedCountries.map((country) => (
           <Box className={classes.countrySelect} key={country}>
-            <Typography style={{ color: countryColors[country] }}>
+            <Typography style={{ color: countryColors[country], maxWidth: '100%' }}>
               select a color for {country}
             </Typography>
             <GithubPicker
