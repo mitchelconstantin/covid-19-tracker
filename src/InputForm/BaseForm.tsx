@@ -16,10 +16,6 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
   },
-  countrySelect: {
-    width: '30%',
-    margin: '10px',
-  },
 }));
 
 interface Props {

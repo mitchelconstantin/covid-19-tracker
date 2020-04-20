@@ -16,16 +16,6 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-  container: {
-    margin: '20px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  countrySelect: {
-    width: '30%',
-    margin: '10px',
-  },
   appBar: {
     backgroundColor: 'lightGrey',
   },
