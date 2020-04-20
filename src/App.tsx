@@ -104,7 +104,7 @@ const App = () => {
         </Tabs>
       </AppBar>
       <TabContent hidden={tabIndex !== 0}>
-        <Box className={classes.dataTab}>
+        <Box className={classes.dataTab} data-testid="data-view">
           {loading ? (
             <CircularProgress
               className={classes.loading}

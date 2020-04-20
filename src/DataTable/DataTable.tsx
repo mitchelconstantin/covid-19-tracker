@@ -46,7 +46,7 @@ export const DataTable = ({ data, countryColors }: Props) => {
   };
 
   return (
-    <Box className={classes.container} data-testid={'data-table'}>
+    <Box className={classes.container}>
       <MUIDataTable
         data={rows}
         columns={columns}
