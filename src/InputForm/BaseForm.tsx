@@ -4,6 +4,20 @@ import { CountrySelect } from './Components/CountrySelect';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { FormData, CountryList } from '../shared/Types';
+import { Box, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  container: {
+    margin: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  countrySelect: {
+    width: '30%',
+    margin: '10px',
+  },
+}));
 
 interface Props {
   formData: FormData;
@@ -11,6 +25,7 @@ interface Props {
 }
 
 export const BaseForm = ({ formData, setFormData }: Props) => {
+  const classes = useStyles();
   const setFromDate = (fromDate: string) => {
     setFormData((prev: FormData) => ({ ...prev, fromDate }));
   };
@@ -23,14 +38,12 @@ export const BaseForm = ({ formData, setFormData }: Props) => {
     //todo add random color selection so that country colors match between grid and chart automatically
     setFormData((prev: FormData) => ({ ...prev, selectedCountries }));
   };
-  // todo
-  // add validation
+  // todo: add validation
   // from date: greater than beginning of API () && less than toDate
   // to date: greater than from date () && less than or equal to today
-
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <div data-testid="base-form">
+      <Box data-testid="base-form" className={classes.container}>
         <DateSelect
           label="from"
           date={formData.fromDate}
@@ -41,7 +54,7 @@ export const BaseForm = ({ formData, setFormData }: Props) => {
           selectedCountries={formData.selectedCountries}
           setSelectedCountries={setSelectedCountries}
         />
-      </div>
+      </Box>
     </MuiPickersUtilsProvider>
   );
 };

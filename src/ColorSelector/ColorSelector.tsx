@@ -3,7 +3,7 @@ import { FormData } from '../shared/Types';
 import { GithubPicker } from 'react-color';
 import { Box, Typography, makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     margin: '20px',
     display: 'flex',

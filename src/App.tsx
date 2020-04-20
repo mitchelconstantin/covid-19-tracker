@@ -5,7 +5,28 @@ import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/CovidAPI';
 import { CountryDictionary, defaultFormData, FormData } from './shared/Types';
-import { AppBar, Tabs, Tab, Box } from '@material-ui/core';
+import { AppBar, Tabs, Tab, Box, makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles(() => ({
+  container: {
+    margin: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  countrySelect: {
+    width: '30%',
+    margin: '10px',
+  },
+  appBar: {
+    backgroundColor: 'lightGrey',
+  },
+  tabs: {
+    color: 'black'
+    // backgroundColor: 'white',
+    // boxShadow: '0',
+  },
+}));
 
 const filterData = (
   covidData: CountryDictionary,
@@ -42,6 +63,7 @@ const App = () => {
     {}
   );
   const [tabIndex, setTabIndex] = useState(0);
+  const classes = useStyles();
   const TabContent = Box;
   const handleChangeTab = (
     event: React.ChangeEvent<{}>,
@@ -63,9 +85,14 @@ const App = () => {
   }, [formData, covidData]);
   return (
     <div className="App">
-      <BaseForm formData={formData} setFormData={setFormData} />
-      <AppBar position="static">
-        <Tabs value={tabIndex} onChange={handleChangeTab}>
+      <AppBar position="static" className={classes.appBar}>
+        <BaseForm formData={formData} setFormData={setFormData} />
+        <Tabs
+          className={classes.tabs}
+          value={tabIndex}
+          centered
+          onChange={handleChangeTab}
+        >
           <Tab label="Data View" />
           <Tab label="Choose Colors" />
         </Tabs>
