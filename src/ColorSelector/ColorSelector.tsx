@@ -28,8 +28,7 @@ export const ColorSelector = ({ formData, setFormData }: Props) => {
   const countryColors = formData.countryColors;
   const selectedCountries = formData.selectedCountries;
 
-  //@ts-ignore
-  const handleChangeComplete = (hex, country) => {
+  const handleChangeComplete = (hex: string, country: string) => {
     setFormData((prev: FormData) => ({
       ...prev,
       countryColors: { ...countryColors, [country]: hex },

@@ -66,7 +66,6 @@ export const CountrySelect = ({
   const handleClose = () => {
     setSelectedCountries(localSelectedCountries);
   };
-  // todo fix jank when selecting multiple countries
   return (
     <FormControl className={classes.formControl}>
       <InputLabel>Countries</InputLabel>
