@@ -5,7 +5,7 @@ import { ColorSelector } from './ColorSelector/ColorSelector';
 import { DataTable } from './DataTable/DataTable';
 import { CovidAPI } from './shared/CovidAPI';
 import { About } from './About/About';
-import { CountryDictionary, defaultFormData, FormData } from './shared/Types';
+import { CountryDictionary, defaultFormData } from './shared/Types';
 import {
   AppBar,
   Tabs,
@@ -14,6 +14,7 @@ import {
   makeStyles,
   CircularProgress,
 } from '@material-ui/core';
+import { filterData } from './shared/Behaviors';
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -33,32 +34,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const filterData = (
-  covidData: CountryDictionary,
-  formData: FormData
-): CountryDictionary => {
-  const newData: CountryDictionary = {};
-  formData.selectedCountries.forEach((country) => {
-    const filteredData = covidData[country].filter(({ date }) => {
-      // https://stackoverflow.com/a/14569783
-      const offsetDate = new Date(date);
-      const formattedDataTime = new Date(
-        offsetDate.getTime() - offsetDate.getTimezoneOffset() * -60000
-      );
-
-      const formattedFromDate = new Date(formData.fromDate);
-      const formattedToDate = new Date(formData.toDate);
-
-      return (
-        formattedDataTime >= formattedFromDate &&
-        formattedDataTime <= formattedToDate
-      );
-    });
-    newData[country] = filteredData;
-  });
-  return newData;
-};
-
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState(defaultFormData);
@@ -76,7 +51,6 @@ const App = () => {
   ) => {
     setTabIndex(newTabIndex);
   };
-
   //initial data fetch
   useEffect(() => {
     CovidAPI.getAll().then((fullData) => {
