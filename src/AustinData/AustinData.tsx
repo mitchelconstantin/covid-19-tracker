@@ -6,18 +6,38 @@ import {
   Box,
   CircularProgress,
   Link,
+  AppBar,
+  Toolbar,
+  Typography,
 } from "@material-ui/core";
 import { Link as RRLink } from "react-router-dom";
 import { TimeSensitiveMessage } from "./TimeSensitiveMessage";
 
-const useStyles = makeStyles(() => ({
-  dataTab: {
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    backgroundColor: "lightGrey",
+  },
+  pageContainer: {
+    margin: "12px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   item: {
     margin: "8px",
+  },
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+    color: "black",
+  },
+  headerImage: {
+    height: "30px",
   },
 }));
 
@@ -64,15 +84,25 @@ export const AustinData = () => {
 
   return (
     <div>
-      <Button
-        style={{ margin: "8px" }}
-        component={RRLink}
-        variant="outlined"
-        to={"/main"}
-      >
-        Main Dashboard
-      </Button>
-      <Box className={classes.dataTab}>
+      <AppBar className={classes.appBar} position="static">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            Latest COVID-19 Data for Austin, TX
+          </Typography>
+          <Button component={RRLink} to={"/main"}>
+            Main Dashboard
+          </Button>
+          <Button href="https://github.com/mitchelconstantin/covid-19-tracker">
+            <img
+              alt="github logo"
+              className={classes.headerImage}
+              src={"/github.png"}
+            />
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      <Box className={classes.pageContainer}>
         {newestPost && (
           <>
             <TimeSensitiveMessage time={newestPost.created_utc} />
@@ -83,12 +113,7 @@ export const AustinData = () => {
             >
               Reddit Thread {getReadableDate(newestPost.created_utc)}
             </Button>
-            <img
-              className={classes.item}
-              alt="latest Austin data"
-              src={newestPost.url}
-              width="97%"
-            />
+            <img alt="latest Austin data" src={newestPost.url} width="97%" />
           </>
         )}
         {!newestPost && <CircularProgress />}
