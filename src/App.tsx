@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { BaseForm } from './InputForm/BaseForm';
-import { TimeSeriesPlot } from './TimeSeriesPlot/TimeSeriesPlot';
-import { ColorSelector } from './ColorSelector/ColorSelector';
-import { DataTable } from './DataTable/DataTable';
-import { CovidAPI } from './shared/CovidAPI';
-import { About } from './About/About';
-import { CountryDictionary, defaultFormData } from './shared/Types';
+import React, { useState, useEffect } from "react";
+import { BaseForm } from "./InputForm/BaseForm";
+import { TimeSeriesPlot } from "./TimeSeriesPlot/TimeSeriesPlot";
+import { ColorSelector } from "./ColorSelector/ColorSelector";
+import { DataTable } from "./DataTable/DataTable";
+import { CovidAPI } from "./shared/CovidAPI";
+import { About } from "./About/About";
+import { CountryDictionary, defaultFormData } from "./shared/Types";
 import {
   AppBar,
   Tabs,
@@ -13,24 +13,26 @@ import {
   Box,
   makeStyles,
   CircularProgress,
-} from '@material-ui/core';
-import { filterData } from './shared/Behaviors';
+  Button,
+} from "@material-ui/core";
+import { filterData } from "./shared/Behaviors";
+import { AustinData } from "./AustinData/AustinData";
 
 const useStyles = makeStyles(() => ({
   appBar: {
-    backgroundColor: 'lightGrey',
+    backgroundColor: "lightGrey",
   },
   tabs: {
-    color: 'black',
+    color: "black",
   },
   dataTab: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: '20px',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    marginTop: "20px",
   },
   loading: {
-    marginTop: '35vh',
+    marginTop: "35vh",
   },
 }));
 
@@ -42,6 +44,7 @@ const App = () => {
     {}
   );
   const [tabIndex, setTabIndex] = useState(0);
+  const [austinDashboard, setAustinDashboard] = useState(false);
   const classes = useStyles();
   const TabContent = Box;
 
@@ -63,10 +66,16 @@ const App = () => {
     Object.keys(covidData).length &&
       setSelectedCovidData(filterData(covidData, formData));
   }, [formData, covidData]);
+
+  if (austinDashboard)
+    return <AustinData goBack={() => setAustinDashboard(false)} />;
   return (
     <div className="App">
       <AppBar position="static" className={classes.appBar}>
         <BaseForm formData={formData} setFormData={setFormData} />
+        <Button onClick={() => setAustinDashboard(true)}>
+          switch to Austin Dashboard
+        </Button>
         <Tabs
           className={classes.tabs}
           value={tabIndex}

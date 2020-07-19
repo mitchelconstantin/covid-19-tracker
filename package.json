@@ -25,6 +25,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "serve": "^11.3.0",
+    "snoowrap": "^1.21.0",
     "typescript": "^3.7.5"
   },
   "scripts": {
@@ -33,6 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start": "serve -s build",
+    "start-dev": "react-scripts start",
     "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
