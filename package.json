@@ -23,6 +23,7 @@
     "react": "^16.13.1",
     "react-color": "^2.18.0",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "serve": "^11.3.0",
     "snoowrap": "^1.21.0",

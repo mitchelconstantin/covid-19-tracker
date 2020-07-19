@@ -17,6 +17,7 @@ import {
 } from "@material-ui/core";
 import { filterData } from "./shared/Behaviors";
 import { AustinData } from "./AustinData/AustinData";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -44,7 +45,6 @@ const App = () => {
     {}
   );
   const [tabIndex, setTabIndex] = useState(0);
-  const [austinDashboard, setAustinDashboard] = useState(false);
   const classes = useStyles();
   const TabContent = Box;
 
@@ -67,55 +67,63 @@ const App = () => {
       setSelectedCovidData(filterData(covidData, formData));
   }, [formData, covidData]);
 
-  if (austinDashboard)
-    return <AustinData goBack={() => setAustinDashboard(false)} />;
   return (
-    <div className="App">
-      <AppBar position="static" className={classes.appBar}>
-        <BaseForm formData={formData} setFormData={setFormData} />
-        <Button onClick={() => setAustinDashboard(true)}>
-          switch to Austin Dashboard
-        </Button>
-        <Tabs
-          className={classes.tabs}
-          value={tabIndex}
-          centered
-          onChange={handleChangeTab}
-        >
-          <Tab label="Data View" />
-          <Tab label="Choose Colors" />
-          <Tab label="About" />
-        </Tabs>
-      </AppBar>
-      <TabContent hidden={tabIndex !== 0}>
-        <Box className={classes.dataTab} data-testid="data-view">
-          {loading ? (
-            <CircularProgress
-              className={classes.loading}
-              disableShrink
-              color="secondary"
-            />
-          ) : (
-            <>
-              <TimeSeriesPlot
-                data={selectedCovidData}
-                countryColors={formData.countryColors}
-              />
-              <DataTable
-                data={selectedCovidData}
-                countryColors={formData.countryColors}
-              />
-            </>
-          )}
-        </Box>
-      </TabContent>
-      <TabContent hidden={tabIndex !== 1}>
-        <ColorSelector formData={formData} setFormData={setFormData} />
-      </TabContent>
-      <TabContent hidden={tabIndex !== 2}>
-        <About />
-      </TabContent>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/austin">
+            <AustinData />
+          </Route>
+          <Route path="/main">
+            <AppBar position="static" className={classes.appBar}>
+              <BaseForm formData={formData} setFormData={setFormData} />
+              <Button component={Link} to={"/austin"}>
+                Austin Dashboard
+              </Button>
+
+              <Tabs
+                className={classes.tabs}
+                value={tabIndex}
+                centered
+                onChange={handleChangeTab}
+              >
+                <Tab label="Data View" />
+                <Tab label="Choose Colors" />
+                <Tab label="About" />
+              </Tabs>
+            </AppBar>
+            <TabContent hidden={tabIndex !== 0}>
+              <Box className={classes.dataTab} data-testid="data-view">
+                {loading ? (
+                  <CircularProgress
+                    className={classes.loading}
+                    disableShrink
+                    color="secondary"
+                  />
+                ) : (
+                  <>
+                    <TimeSeriesPlot
+                      data={selectedCovidData}
+                      countryColors={formData.countryColors}
+                    />
+                    <DataTable
+                      data={selectedCovidData}
+                      countryColors={formData.countryColors}
+                    />
+                  </>
+                )}
+              </Box>
+            </TabContent>
+            <TabContent hidden={tabIndex !== 1}>
+              <ColorSelector formData={formData} setFormData={setFormData} />
+            </TabContent>
+            <TabContent hidden={tabIndex !== 2}>
+              <About />
+            </TabContent>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 

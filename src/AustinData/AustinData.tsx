@@ -8,6 +8,7 @@ import {
   CircularProgress,
   Link,
 } from "@material-ui/core";
+import { Link as RRLink } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -54,7 +55,7 @@ const getReadableDate = (timestamp: number) => {
 
 const getRedditUrl = (url) => `https://reddit.com${url}`;
 
-export const AustinData = ({ goBack }) => {
+export const AustinData = ({}) => {
   const [posts, setPosts] = useState([]);
   const classes = useStyles();
   const newestPost = posts[0];
@@ -65,7 +66,9 @@ export const AustinData = ({ goBack }) => {
 
   return (
     <div>
-      <Button onClick={goBack}>go back</Button>
+      <Button component={RRLink} to={"/main"}>
+        Main Dashboard
+      </Button>
       <Box className={classes.dataTab}>
         {newestPost && (
           <>
