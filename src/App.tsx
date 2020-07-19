@@ -17,7 +17,13 @@ import {
 } from "@material-ui/core";
 import { filterData } from "./shared/Behaviors";
 import { AustinData } from "./AustinData/AustinData";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -121,6 +127,7 @@ const App = () => {
               <About />
             </TabContent>
           </Route>
+          <Route render={() => <Redirect to="/main" />} />
         </Switch>
       </div>
     </Router>
