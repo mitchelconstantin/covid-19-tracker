@@ -9,9 +9,12 @@ import {
   AppBar,
   Toolbar,
   Typography,
+  IconButton,
 } from "@material-ui/core";
-import { Link as RRLink } from "react-router-dom";
+// import { Link as RRLink } from "react-router-dom";
 import { TimeSensitiveMessage } from "./TimeSensitiveMessage";
+import { GitHub, InfoOutlined } from "@material-ui/icons";
+import { InfoDialog } from "./InfoDialog";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -76,7 +79,17 @@ const getRedditUrl = (url) => `https://reddit.com${url}`;
 export const AustinData = () => {
   const [posts, setPosts] = useState([]);
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  // const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const newestPost = posts[0];
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     getSubmissions().then(setPosts);
@@ -87,18 +100,14 @@ export const AustinData = () => {
       <AppBar className={classes.appBar} position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            Latest COVID-19 Data for Austin, TX
+            COVID-19 ATX
           </Typography>
-          <Button component={RRLink} to={"/main"}>
-            Main Dashboard
-          </Button>
-          <Button href="https://github.com/mitchelconstantin/covid-19-tracker">
-            <img
-              alt="github logo"
-              className={classes.headerImage}
-              src={"/github.png"}
-            />
-          </Button>
+          <IconButton onClick={handleClickOpen}>
+            <InfoOutlined />
+          </IconButton>
+          <IconButton href="https://github.com/mitchelconstantin/covid-19-tracker">
+            <GitHub />
+          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -118,6 +127,8 @@ export const AustinData = () => {
         )}
         {!newestPost && <CircularProgress />}
       </Box>
+
+      <InfoDialog open={open} onClose={handleClose} />
     </div>
   );
 };
