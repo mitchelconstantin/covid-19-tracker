@@ -12,7 +12,7 @@ const updatedToday = (time) => datesAreOnSameDay(new Date(), new Date(time));
 const ONE_DAY = 86400000;
 
 export const TimeSensitiveMessage = ({ time }) => {
-  const upToDate = updatedToday(time);
+  const upToDate = updatedToday(time * 1000);
   const twentyFourHoursSinceLastPost = time * 1000 + ONE_DAY;
   const pastTwentyFourHours = Date.now() > twentyFourHoursSinceLastPost;
 
