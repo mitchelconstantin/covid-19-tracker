@@ -52,7 +52,7 @@ const r = new snoowrap({
 const getSubmissions = async () => {
   const s = await r.getUser("RationalAnarchy").getSubmissions();
   return s
-    .sort((post) => post.created)
+    .sort((postA, postB) => postB.created - postA.created)
     .filter(
       (post) =>
         post.subreddit_name_prefixed === "r/Austin" &&
