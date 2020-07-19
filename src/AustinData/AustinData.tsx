@@ -8,6 +8,7 @@ import {
   Link,
 } from "@material-ui/core";
 import { Link as RRLink } from "react-router-dom";
+import { TimeSensitiveMessage } from "./TimeSensitiveMessage";
 
 const useStyles = makeStyles(() => ({
   appBar: {
@@ -37,7 +38,13 @@ const r = new snoowrap({
 
 const getSubmissions = async () => {
   const s = await r.getUser("RationalAnarchy").getSubmissions();
-  return s.sort((post) => post.created);
+  return s
+    .sort((post) => post.created)
+    .filter(
+      (post) =>
+        post.subreddit_name_prefixed === "r/Austin" &&
+        post.title.includes("Travis County COVID-19")
+    );
 };
 
 const getReadableDate = (timestamp: number) => {
@@ -48,7 +55,6 @@ const getReadableDate = (timestamp: number) => {
   // const hours = date.getHours();
   // const minutes = date.getMinutes();
   // const seconds = date.getSeconds();
-
   return `${month}-${day}-${year}`;
 };
 
@@ -71,11 +77,10 @@ export const AustinData = () => {
       <Box className={classes.dataTab}>
         {newestPost && (
           <>
-            accurate as of {getReadableDate(newestPost.created)}
+            <TimeSensitiveMessage time={newestPost.created_utc} />
             <Link href={getRedditUrl(newestPost.permalink)}>
-              See Reddit Thread
+              Reddit Thread for {getReadableDate(newestPost.created_utc)}
             </Link>
-            {/* TODO: put time until 7pm central here */}
             <img alt="latest Austin data" src={newestPost.url} width="100%" />
           </>
         )}
