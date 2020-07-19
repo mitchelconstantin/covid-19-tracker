@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import snoowrap from "snoowrap";
 import {
   Button,
-  Grid,
   makeStyles,
   Box,
   CircularProgress,
@@ -55,7 +54,7 @@ const getReadableDate = (timestamp: number) => {
 
 const getRedditUrl = (url) => `https://reddit.com${url}`;
 
-export const AustinData = ({}) => {
+export const AustinData = () => {
   const [posts, setPosts] = useState([]);
   const classes = useStyles();
   const newestPost = posts[0];
@@ -77,7 +76,7 @@ export const AustinData = ({}) => {
               See Reddit Thread
             </Link>
             {/* TODO: put time until 7pm central here */}
-            <img src={newestPost.url} width="100%" />
+            <img alt="latest Austin data" src={newestPost.url} width="100%" />
           </>
         )}
         {!newestPost && <CircularProgress />}
