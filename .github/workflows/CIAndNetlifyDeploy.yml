@@ -17,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [8.x, 10.x, 12.x]
+        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -30,15 +30,31 @@ jobs:
       - run: npm test
         env:
           CI: true
-  publish:
+  # publish:
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - uses: actions/checkout@master
+
+  #     - name: Publish
+  #       uses: netlify/actions/build@master
+  #       env:
+  #         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  #         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  deploy:
     needs: [build]
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@master
-
-      - name: Publish
-        uses: netlify/actions/build@master
+      # Checkout repo
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install
+      - name: Build site
+        run: npm run build
+      # Deploy the site with netlify-cli
+      - name: Deploy Site
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: npx netlify-cli deploy --dir=public --prod
