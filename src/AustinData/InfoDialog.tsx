@@ -21,7 +21,7 @@ export const InfoDialog = ({ open, onClose }) => {
           <Link href="https://www.reddit.com/user/RationalAnarchy/">
             RationalAnarchy
           </Link>
-          . Many thanks to him for his daily updates.
+          . Many thanks to him for his daily updates!
           <br />
           <Divider style={{ marginTop: "8px", marginBottom: "8px" }} />
           The countdown timer is set to expire 24 hours after his last post.

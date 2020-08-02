@@ -1,4 +1,7 @@
 ## COVID-19 Tracker
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d4e22cf7-92f9-4de7-a3b0-9d0de2f0eb3f/deploy-status)](https://app.netlify.com/sites/mconst-covid/deploys)
+
 Dashboard web app displaying COVID-19 cases by country.
 [Demo](https://mconst-covid.netlify.app/main).
 
@@ -6,14 +9,12 @@ Dashboard web app displaying COVID-19 cases by country.
   <img alt="app-screenshot" src="https://i.imgur.com/O5m611W.png" />
 </div>
 
-
 Secondary Austin, Texas specific page showing the most recent local data provided by reddit user [RationalAnarchy](https://www.reddit.com/user/RationalAnarchy/).
 [Demo](https://mconst-covid.netlify.app/austin).
 
 <div style="border: 1px solid #D8D8D8; border-radius: 2px;">
   <img alt="app-screenshot" src="https://i.imgur.com/6JFgkui.png" />
 </div>
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
