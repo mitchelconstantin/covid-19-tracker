@@ -6,6 +6,7 @@ import {
   DialogContentText,
   Link,
   Divider,
+  Typography,
 } from "@material-ui/core";
 
 export const InfoDialog = ({ open, onClose }) => {
@@ -14,6 +15,8 @@ export const InfoDialog = ({ open, onClose }) => {
       <DialogTitle id="simple-dialog-title">About</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
+          <Typography variant={"h6"}> Austin </Typography>
+          <Divider style={{ marginTop: "8px", marginBottom: "8px" }} />
           This data is sourced from Reddit user{" "}
           <Link href="https://www.reddit.com/user/RationalAnarchy/">
             RationalAnarchy
@@ -23,6 +26,14 @@ export const InfoDialog = ({ open, onClose }) => {
           <Divider style={{ marginTop: "8px", marginBottom: "8px" }} />
           The countdown timer is set to expire 24 hours after his last post.
           This is generally around 7pm Central.
+          <Divider style={{ marginTop: "8px", marginBottom: "8px" }} />
+          <Typography variant={"h6"}> WorldWide </Typography>
+          <Divider style={{ marginTop: "8px", marginBottom: "8px" }} />
+          This data is sourced from Github user{" "}
+          <Link href="https://github.com/pomber/covid19">Pomber</Link>
+          . It is updated 3 times per day.
+          <br />
+          <Divider style={{ marginTop: "8px", marginBottom: "8px" }} />
         </DialogContentText>
       </DialogContent>
     </Dialog>

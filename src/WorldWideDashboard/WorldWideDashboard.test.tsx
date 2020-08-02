@@ -1,14 +1,15 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
-import App from './App';
-describe('App component rendering', () => {
-  it('first tab should load by default, content should toggle when clicking tabs', () => {
-    const { getByTestId, getByText } = render(<App />);
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import { WorldWideDashboard } from "./WorldWideDashboard";
 
-    const baseForm = getByTestId('base-form');
-    const dataView = getByTestId('data-view');
-    const colorSelector = getByTestId('color-selector');
-    const aboutSection = getByTestId('about');
+describe("WorldWideDashboard component rendering", () => {
+  it("first tab should load by default, content should toggle when clicking tabs", () => {
+    const { getByTestId, getByText } = render(<WorldWideDashboard />);
+
+    const baseForm = getByTestId("base-form");
+    const dataView = getByTestId("data-view");
+    const colorSelector = getByTestId("color-selector");
+    const aboutSection = getByTestId("about");
 
     const testDataViewTabRender = () => {
       expect(baseForm).toBeVisible();
@@ -33,13 +34,13 @@ describe('App component rendering', () => {
 
     testDataViewTabRender();
 
-    fireEvent.click(getByText('Choose Colors'));
+    fireEvent.click(getByText("Choose Colors"));
     testColorSelectTabRender();
 
-    fireEvent.click(getByText('Data View'));
+    fireEvent.click(getByText("Data View"));
     testDataViewTabRender();
 
-    fireEvent.click(getByText('About'));
+    fireEvent.click(getByText("About"));
     testAboutTabRender();
   });
 });

@@ -6,20 +6,11 @@ import {
   Box,
   CircularProgress,
   Link,
-  AppBar,
-  Toolbar,
-  Typography,
-  IconButton,
 } from "@material-ui/core";
-// import { Link as RRLink } from "react-router-dom";
 import { TimeSensitiveMessage } from "./TimeSensitiveMessage";
-import { GitHub, InfoOutlined } from "@material-ui/icons";
-import { InfoDialog } from "./InfoDialog";
+import { SmallAppBar } from "../SmallAppBar/SmallAppBar";
 
 const useStyles = makeStyles((theme) => ({
-  appBar: {
-    backgroundColor: "lightGrey",
-  },
   pageContainer: {
     margin: "12px",
     display: "flex",
@@ -28,19 +19,6 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     margin: "8px",
-  },
-  root: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  title: {
-    flexGrow: 1,
-    color: "black",
-  },
-  headerImage: {
-    height: "30px",
   },
 }));
 
@@ -79,17 +57,7 @@ const getRedditUrl = (url) => `https://reddit.com${url}`;
 export const AustinData = () => {
   const [posts, setPosts] = useState([]);
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  // const [selectedValue, setSelectedValue] = React.useState(emails[1]);
   const newestPost = posts[0];
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   useEffect(() => {
     getSubmissions().then(setPosts);
@@ -97,20 +65,7 @@ export const AustinData = () => {
 
   return (
     <div>
-      <AppBar className={classes.appBar} position="static">
-        <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            COVID-19 ATX
-          </Typography>
-          <IconButton onClick={handleClickOpen}>
-            <InfoOutlined />
-          </IconButton>
-          <IconButton href="https://github.com/mitchelconstantin/covid-19-tracker">
-            <GitHub />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
+      <SmallAppBar label={"COVID-19 ATX"} />
       <Box className={classes.pageContainer}>
         {newestPost && (
           <>
@@ -127,8 +82,6 @@ export const AustinData = () => {
         )}
         {!newestPost && <CircularProgress />}
       </Box>
-
-      <InfoDialog open={open} onClose={handleClose} />
     </div>
   );
 };
