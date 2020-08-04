@@ -42,19 +42,44 @@ jobs:
   #       env:
   #         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
   #         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-  deploy:
-    needs: [build]
+  # deploy:
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Checkout repo
+  #     - uses: actions/checkout@v2
+  #     - name: Install Dependencies
+  #       run: npm install
+  #     - name: Build site
+  #       run: npm run build
+  #     # Deploy the site with netlify-cli
+  #     - name: Deploy Site
+  #       env:
+  #         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+  #         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+  #       run: npx netlify-cli deploy --dir=public --prod
+  deploy-to-production:
+    needs: build
     runs-on: ubuntu-latest
     steps:
-      # Checkout repo
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Install Dependencies
-        run: npm install
-      - name: Build site
-        run: npm run build
-      # Deploy the site with netlify-cli
-      - name: Deploy Site
+        run: yarn
+      - name: Build
+        run: yarn build
+        # env:
+        #   REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
+        #   REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
+      - name: Deploy
+        uses: nwtgck/actions-netlify@v1.1
+        with:
+          deploy-message: ${{ github.event.head_commit.message }}
+          enable-commit-comment: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          production-branch: master
+          production-deploy: true
+          publish-dir: "build"
         env:
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        run: npx netlify-cli deploy --dir=public --prod
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
