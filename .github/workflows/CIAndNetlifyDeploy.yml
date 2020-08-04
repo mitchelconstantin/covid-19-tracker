@@ -65,9 +65,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install Dependencies
-        run: yarn
+        run: npm install
       - name: Build
-        run: yarn build
+        run: npm run build
         # env:
         #   REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
         #   REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
@@ -79,7 +79,7 @@ jobs:
 #           github-token: ${{ secrets.GITHUB_TOKEN }}
           production-branch: master
           production-deploy: true
-          publish-dir: "build"
+          publish-dir: "public"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
