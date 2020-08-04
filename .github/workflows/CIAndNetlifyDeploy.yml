@@ -68,9 +68,12 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
-        # env:
-        #   REACT_APP_ENV: ${{ secrets.REACT_APP_ENV }}
-        #   REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
+        env:
+          REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
+          REACT_APP_CLIENT_SECRET: ${{ secrets.REACT_APP_CLIENT_SECRET }}
+          REACT_APP_PASSWORD: ${{ secrets.REACT_APP_PASSWORD }}
+          REACT_APP_USER_AGENT: ${{ secrets.REACT_APP_USER_AGENT }}
+          REACT_APP_USER_NAME: ${{ secrets.REACT_APP_USER_NAME }}:  
       - name: Deploy
         uses: nwtgck/actions-netlify@v1.1
         with:
