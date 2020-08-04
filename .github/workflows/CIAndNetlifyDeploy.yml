@@ -73,7 +73,7 @@ jobs:
           REACT_APP_CLIENT_SECRET: ${{ secrets.REACT_APP_CLIENT_SECRET }}
           REACT_APP_PASSWORD: ${{ secrets.REACT_APP_PASSWORD }}
           REACT_APP_USER_AGENT: ${{ secrets.REACT_APP_USER_AGENT }}
-          REACT_APP_USER_NAME: ${{ secrets.REACT_APP_USER_NAME }}:  
+          REACT_APP_USER_NAME: ${{ secrets.REACT_APP_USER_NAME }}
       - name: Deploy
         uses: nwtgck/actions-netlify@v1.1
         with:
