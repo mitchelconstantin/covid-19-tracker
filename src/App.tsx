@@ -14,7 +14,7 @@ export const App = () => {
           <Route path="/austin">
             <AustinData />
           </Route>
-          <Route path="/main">
+          <Route path="/world">
             <WorldWideDashboard />
           </Route>
           <Route
