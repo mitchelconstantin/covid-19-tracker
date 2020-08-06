@@ -35,7 +35,7 @@ export const App = () => {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="outlined" component={Link} to={"/main"}>
+                    <Button variant="outlined" component={Link} to={"/world"}>
                       World Dashboard
                     </Button>
                   </Grid>
