@@ -1,9 +1,9 @@
 ## COVID-19 Tracker
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d4e22cf7-92f9-4de7-a3b0-9d0de2f0eb3f/deploy-status)](https://app.netlify.com/sites/mconst-covid/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d4e22cf7-92f9-4de7-a3b0-9d0de2f0eb3f/deploy-status)](https://app.netlify.com/sites/mc-covid/deploys)
 
 Dashboard web app displaying COVID-19 cases by country.
-[Demo](https://mconst-covid.netlify.app/main).
+[Demo](https://mc-covid.netlify.app).
 
 <div style="border: 1px solid #D8D8D8; border-radius: 2px; width: '100px;">
   <img alt="app-screenshot" src="https://i.imgur.com/O5m611W.png" />
