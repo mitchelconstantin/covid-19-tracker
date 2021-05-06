@@ -17,7 +17,7 @@
     "@types/react-color": "^3.0.1",
     "@types/react-dom": "^16.9.6",
     "date-fns": "^2.0.0-beta.5",
-    "highcharts": "^8.1.2",
+    "highcharts": "^9.0.0",
     "highcharts-react-official": "^3.0.0",
     "mui-datatables": "^2.14.0",
     "react": "^16.13.1",
